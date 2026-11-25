@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # 1. 페이지 기본 설정 (모바일 및 데스크탑 반응형)
 st.set_page_config(
@@ -599,3 +600,41 @@ st.markdown("""
     Have a cozy and wonderful stay in Seoul 🐾
 </div>
 """, unsafe_allow_html=True)
+
+# 8. 모바일 좌우 스와이프(터치 슬라이드) 탭 전환 스크립트
+components.html("""
+<script>
+const doc = window.parent.document;
+let startX = 0;
+let startY = 0;
+
+doc.addEventListener('touchstart', function(e) {
+    startX = e.changedTouches[0].screenX;
+    startY = e.changedTouches[0].screenY;
+}, {passive: true});
+
+doc.addEventListener('touchend', function(e) {
+    const endX = e.changedTouches[0].screenX;
+    const endY = e.changedTouches[0].screenY;
+    const diffX = endX - startX;
+    const diffY = endY - startY;
+
+    // 수평 스와이프 거리가 60px 이상이고, 위아래 스크롤보다 가로 이동이 클 때만 동작
+    if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+        const tabs = Array.from(doc.querySelectorAll('button[data-baseweb="tab"]'));
+        const activeIndex = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
+        if (activeIndex === -1) return;
+
+        if (diffX < 0 && activeIndex < tabs.length - 1) {
+            // 왼쪽으로 밀기 -> 다음 탭
+            tabs[activeIndex + 1].click();
+            window.parent.scrollTo({top: 0, behavior: 'smooth'});
+        } else if (diffX > 0 && activeIndex > 0) {
+            // 오른쪽으로 밀기 -> 이전 탭
+            tabs[activeIndex - 1].click();
+            window.parent.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    }
+}, {passive: true});
+</script>
+""", height=0)
