@@ -1,10 +1,15 @@
 import streamlit as st
 
 # =========================================================
-# [설정 영역] 실제 숙소 Wi-Fi 정보만 여기서 수정하세요
+# [설정 영역] 실제 숙소 Wi-Fi 및 연락처 정보
 # =========================================================
-WIFI_ID = "mongle-stay_5G"
-WIFI_PW = "mongle1234"  # 실제 Wi-Fi 비밀번호로 변경해 주세요
+WIFI_5G = "U+Net1825_5G"
+WIFI_24G = "U+Net1825"
+WIFI_PW = "42155551M#"
+
+WECHAT_ID = "mongle-stay"
+LINE_ID = "mongle-stay"
+KAKAO_ID = "mongle0607"
 
 # ---------------------------------------------------------
 # 1. 페이지 기본 설정
@@ -17,7 +22,7 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------
-# 2. 커스텀 CSS (언어 버튼 시인성 강화 · 슬림 헤더 · 택시 카드 · 아코디언)
+# 2. 커스텀 CSS
 # ---------------------------------------------------------
 st.markdown("""
 <style>
@@ -64,7 +69,6 @@ st.markdown("""
         color: #2C2A29 !important;
         font-weight: 600 !important;
     }
-    /* 선택된 언어 버튼 강조 */
     div[data-testid="stRadio"] label:has(input:checked) {
         background-color: #2D4A3E !important;
         border-color: #2D4A3E !important;
@@ -154,7 +158,7 @@ st.markdown("""
         font-size: 0.92rem;
         line-height: 1.62;
         color: #4A4642;
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.38rem;
     }
 
     /* 택시 기사님용 큰 글씨 카드 */
@@ -199,7 +203,7 @@ st.markdown("""
         margin: 0.6rem 0;
         font-size: 0.88rem;
         color: #8A2B28;
-        line-height: 1.5;
+        line-height: 1.55;
     }
     .tip-box {
         background-color: #F2F7F4;
@@ -209,10 +213,10 @@ st.markdown("""
         margin: 0.6rem 0;
         font-size: 0.88rem;
         color: #264035;
-        line-height: 1.5;
+        line-height: 1.55;
     }
 
-    /* 방 소개 미니 그리드 */
+    /* 방 소개 & 연락처 미니 그리드 */
     .room-pill {
         background-color: #F7F4EF;
         padding: 0.75rem 0.9rem;
@@ -244,7 +248,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# 3. 다국어 데이터 (4개 국어 - 긴 줄 안전 분리 적용)
+# 3. 다국어 데이터 (노션 이용 안내 내용 100% 반영 · 별표 기호 복원)
 # ---------------------------------------------------------
 CONTENT = {
     "한국어": {
@@ -255,7 +259,7 @@ CONTENT = {
             ("🔐 도어락", "* + 비번 + *"),
             ("📶 Wi-Fi", f"PW: {WIFI_PW}")
         ],
-        "tabs": ["🗺️ 오시는 길", "🔑 체크인·Wi-Fi", "🏡 공간 스토리", "✨ 로컬·교통"],
+        "tabs": ["🗺️ 오시는 길", "🔑 체크인·이용안내", "🏡 공간 스토리", "✨ 로컬·교통"],
         "location": {
             "taxi_tag": "🚖 택시 기사님께 이 화면을 보여주세요",
             "taxi_sub": "게스트 안내: 택시나 길 안내가 필요할 때 아래 한국어 주소를 기사님께 그대로 보여주세요.",
@@ -274,23 +278,50 @@ CONTENT = {
             "map_note": "아래 버튼으로 지도를 바로 열 수 있습니다."
         },
         "checkin": {
-            "door_title": "1. 현관 도어락 & 입실 안내",
+            "contact_title": "0. 문의 및 비상 연락처",
+            "contact_desc": "머무시는 동안 도움이 필요하시면 언제든 아래 메신저 또는 에어비앤비 메시지로 연락해 주세요.",
+            "door_title": "1. 현관 도어락 & Wi-Fi 안내",
             "door_alert": (
                 "⚠️ <b>비밀번호 앞과 뒤에 반드시 별표(*)를 눌러주세요!</b><br>"
                 "입력 순서: <b>[ * ] + [ 비밀번호 4자리 ] + [ * ]</b>"
             ),
-            "door_desc": (
-                "보안을 위해 예약 확정 후 에어비앤비 메시지로 개별 비밀번호를 보내드립니다. "
-                "현관에 들어서시면 실외화를 벗고 비치된 실내화를 착용해 주세요."
-            ),
-            "wifi_title": "2. 무료 초고속 Wi-Fi",
-            "wifi_desc": "우측 상단 복사 아이콘을 누르면 비밀번호가 바로 복사됩니다.",
-            "rules_title": "3. 이용 수칙 & 분리수거",
+            "door_desc": "보안을 위해 개별 비밀번호는 체크인 전 에어비앤비 메시지로 보내드립니다. 우측 복사 아이콘을 누르면 Wi-Fi 정보가 복사됩니다.",
+            "rules_title": "2. 함께 지켜주세요 (이용 수칙)",
             "rules": [
-                "<b>실내 절대 금연:</b> 전자담배 포함 건물 전체 금연입니다.",
-                "<b>정숙 시간:</b> 밤 10시 이후에는 이웃을 위해 소음을 줄여주세요.",
-                "<b>분리수거:</b> 일반쓰레기 / 재활용(플라스틱·캔·유리) / 음식물 쓰레기를 주방 옆 전용함에 나누어 담아주세요.",
-                "<b>외출 시 소등:</b> 외출하실 때는 에어컨, 보일러, 조명을 꺼주시면 감사하겠습니다."
+                "<b>정숙 시간 (22:00 ~ 07:00):</b> 밤 10시 이후에는 이웃을 위해 소음을 줄여주세요.",
+                "<b>실내에서는 신발 벗기:</b> 현관에서 실외화를 벗고 실내화를 착용해 주세요.",
+                "<b>숙소 전체 금연:</b> 전자담배 포함 건물 전체 절대 금연입니다.",
+                "<b>냄새가 강한 요리 금지:</b> 다음 게스트를 위해 생선구이, 청국장 등 냄새가 배는 조리는 삼가주세요.",
+                "<b>세탁기 22시 이후 사용 금지:</b> 야간 진동 및 소음 방지를 위해 밤 10시 이후 세탁기 작동을 멈춰주세요.",
+                "<b>예약 인원 외 방문과 숙박 금지:</b> 사전 등록된 인원 외 외부인 출입은 불가합니다.",
+                "<b>복도와 계단에서도 조용히 이동하기:</b> 공동주택이므로 출입 시 계단과 복도에서 대화를 자제해 주세요."
+            ],
+            "trash_title": "3. 쓰레기 분리수거 안내 🗑️",
+            "trash_alert": (
+                "🚫 <b>음식물 쓰레기와 다른 쓰레기를 절대 섞지 마세요!</b><br>"
+                "한국의 쓰레기 분리수거는 매우 엄격하며, 혼합 배출 시 과태료(벌금) 부과 대상이 됩니다."
+            ),
+            "trash_basic": [
+                "<b>① 음식물 쓰레기:</b> 싱크대 위에 비치된 <b>음식물 쓰레기 전용통(그린컬러)</b> 안에 버려주세요.",
+                "<b>② 재활용 쓰레기 (종이/비닐/캔/유리병/플라스틱):</b> <b>냉장고 앞 분리수거함</b>에 종류별로 넣어주세요. <i>(※ 음식물이 묻은 용기는 반드시 물로 깨끗이 헹군 후 배출해 주세요.)</i>",
+                "<b>③ 일반 쓰레기:</b> 그 외 일반 쓰레기는 <b>trash 수거함</b>에 버려주세요.",
+                "<b>⚠️ 벌레 예방 주의:</b> 음식물이 묻은 쓰레기를 실내에 오래 방치하면 벌레가 생길 수 있습니다. 장기 숙박이나 쓰레기가 많을 때는 반드시 외부 배출 장소에 버려주세요. <i>(미분리 및 장기 방치로 인한 벌레 문제는 숙소에서 책임지기 어렵습니다.)</i>"
+            ],
+            "trash_long_title": "📦 장기숙박(5박 이상) & 수거함이 가득 찼을 때 외부 배출 방법",
+            "trash_long": [
+                "<b>1. 음식물 쓰레기:</b> 작은 음식물 전용 봉투(<b>노랑 2ℓ 또는 초록 3ℓ</b>)에 담아 배출해 주세요.",
+                "<b>2. 재활용 쓰레기:</b> 수거함에 세팅되어 있는 <b>투명 봉투 그대로</b> 묶어서 밖에 배출하시면 됩니다.",
+                "<b>3. 일반 쓰레기 (화장실 쓰레기 포함):</b> <b>흰색 종량제 비닐봉투(20ℓ 또는 50ℓ)</b>에 담아 묶어서 배출해 주세요.",
+                "<b>4. 쓰레기 배출 요일:</b> <b>화요일, 목요일, 일요일</b> (건물 앞 입구 <b>전봇대 밑</b>에 놓아주세요.)",
+                "<b>5. 봉투 비치 위치:</b> 모든 쓰레기 봉투는 <b>싱크볼 하부 수납장</b>에 준비되어 있습니다."
+            ],
+            "checkout_title": "4. 체크아웃 전 확인 체크리스트 (11:00까지)",
+            "checkout_items": [
+                "사용한 식기 세척 및 정리",
+                "쓰레기 분리수거 확인",
+                "에어컨 · 보일러 · 모든 조명 끄기",
+                "창문과 현관 출입문 잠금 확인",
+                "잊은 물건(충전기, 여권 등)이 없는지 확인"
             ]
         },
         "story": {
@@ -303,11 +334,16 @@ CONTENT = {
                 "고려대학교와 경희대학교의 활기, 경동시장의 정겨운 로컬 감성이 어우러진 제기동에서 "
                 "서울의 진짜 일상을 경험해 보세요."
             ),
-            "rooms_title": "3개의 독립된 침실 구성 (최대 6인)",
+            "rooms_title": "예약 인원별 객실 오픈 안내 (최대 6인)",
+            "room_rule_tip": (
+                "🛏️ <b>예약 인원에 맞춰 객실이 준비됩니다:</b><br>"
+                "• <b>4인 이하 예약:</b> 침실 2개 오픈 (<b>팔레트룸 · 앰버룸</b>)<br>"
+                "• <b>5인 이상 예약:</b> 침실 3개 전체 오픈 (<b>팔레트룸 · 앰버룸 · 코지룸</b>)"
+            ),
             "rooms": [
-                ("🎨 Room 1 · Palette (팔레트)", "부드러운 색감과 아늑한 조명이 어우러진 메인 침실입니다."),
-                ("🕯️ Room 2 · Amber (앰버)", "따뜻한 우드 톤과 차분한 휴식에 집중한 침실입니다."),
-                ("☁️ Room 3 · Cozy (코지)", "구름처럼 포근한 침구로 깊은 숙면을 돕는 침실입니다.")
+                ("🎨 Room 1 · Palette (팔레트룸)", "부드러운 색감과 아늑한 조명이 어우러진 메인 침실입니다."),
+                ("🕯️ Room 2 · Amber (앰버룸)", "따뜻한 우드 톤과 차분한 휴식에 집중한 침실입니다."),
+                ("☁️ Room 3 · Cozy (코지룸 · 5인 이상 오픈)", "구름처럼 포근한 침구로 깊은 숙면을 돕는 침실입니다.")
             ],
             "note": (
                 "※ 본 숙소는 호스트 부부가 직접 관리하는 합법 외국인관광 도시민박업 등록 숙소입니다. "
@@ -344,7 +380,7 @@ CONTENT = {
             ("🔐 Door Lock", "* + PIN + *"),
             ("📶 Wi-Fi", f"PW: {WIFI_PW}")
         ],
-        "tabs": ["🗺️ Directions", "🔑 Check-in·Wi-Fi", "🏡 Story", "✨ Local·Transit"],
+        "tabs": ["🗺️ Directions", "🔑 Check-in·Guide", "🏡 Story", "✨ Local·Transit"],
         "location": {
             "taxi_tag": "🚖 SHOW THIS TO YOUR TAXI DRIVER",
             "taxi_sub": "Tip: Show the large Korean address below directly to your taxi driver.",
@@ -363,23 +399,50 @@ CONTENT = {
             "map_note": "Open directly in your preferred map app:"
         },
         "checkin": {
-            "door_title": "1. Smart Door Lock & Entry",
+            "contact_title": "0. Host Contact & Emergency",
+            "contact_desc": "Feel free to reach out anytime via Airbnb message or the messengers below if you need assistance:",
+            "door_title": "1. Smart Door Lock & Wi-Fi",
             "door_alert": (
                 "⚠️ <b>You MUST press Asterisk (*) before and after your PIN!</b><br>"
                 "Sequence: <b>[ * ] + [ 4-Digit PIN ] + [ * ]</b>"
             ),
-            "door_desc": (
-                "For your security, your unique PIN is sent via Airbnb message before check-in. "
-                "Please take off outdoor shoes at the entrance and wear the indoor slippers provided."
-            ),
-            "wifi_title": "2. Free High-Speed Wi-Fi",
-            "wifi_desc": "Tap the copy icon on the top right of the box below to copy the password.",
-            "rules_title": "3. House Rules & Recycling",
+            "door_desc": "Your unique PIN is sent via Airbnb message before check-in. Tap the copy icon below to copy the Wi-Fi password.",
+            "rules_title": "2. House Rules (Please Respect)",
             "rules": [
-                "<b>Strictly No Smoking:</b> No smoking or vaping anywhere in the building.",
-                "<b>Quiet Hours:</b> Please keep noise down after 10:00 PM out of respect for neighbors.",
-                "<b>Recycling:</b> Please separate General Waste, Recyclables (plastic/cans/glass), and Food Waste into the bins next to the kitchen.",
-                "<b>Save Energy:</b> Please turn off the A/C, floor heating (boiler), and lights when going out."
+                "<b>Quiet Hours (22:00 – 07:00):</b> Please keep noise down after 10:00 PM for our neighbors.",
+                "<b>Shoes Off Indoors:</b> Please take off outdoor shoes at the entrance and wear indoor slippers.",
+                "<b>Strictly No Smoking:</b> No smoking or vaping anywhere inside the building.",
+                "<b>No Strong-Smelling Cooking:</b> Please refrain from grilling fish or cooking strong-odored foods.",
+                "<b>No Washing Machine After 22:00:</b> Please avoid using the washer after 10:00 PM due to vibration/noise.",
+                "<b>Registered Guests Only:</b> Unregistered visitors or extra overnight guests are strictly prohibited.",
+                "<b>Quiet in Hallways & Stairs:</b> Please keep your voice down when walking through common stairs/hallways."
+            ],
+            "trash_title": "3. Garbage & Recycling Guide 🗑️",
+            "trash_alert": (
+                "🚫 <b>NEVER mix food waste with general or recyclable trash!</b><br>"
+                "South Korea enforces strict waste sorting laws; improper disposal is subject to fines."
+            ),
+            "trash_basic": [
+                "<b>① Food Waste:</b> Dispose into the <b>green food waste bin</b> located on the kitchen sink counter.",
+                "<b>② Recyclables (Paper / Vinyl / Cans / Glass / Plastic):</b> Sort into the <b>recycling bins in front of the refrigerator</b>. <i>(Please rinse off any food residue cleanly first.)</i>",
+                "<b>③ General Waste:</b> Put all other non-recyclable trash into the <b>Trash bin</b>.",
+                "<b>⚠️ Pest Prevention:</b> Leaving food-stained trash indoors can attract bugs. For long stays or full bins, please take trash to the outdoor collection point. <i>(The host is not responsible for pests caused by unseparated or unemptied trash.)</i>"
+            ],
+            "trash_long_title": "📦 Long Stays (5+ Nights) & When Bins Are Full",
+            "trash_long": [
+                "<b>1. Food Waste:</b> Tie up in a small designated food waste bag (<b>Yellow 2L or Green 3L</b>).",
+                "<b>2. Recyclables:</b> Tie the <b>clear plastic bag</b> inside the recycling bin as-is and take it outside.",
+                "<b>3. General Waste (incl. bathroom trash):</b> Place inside a <b>White Volume-Based Trash Bag (20L or 50L)</b> and tie tightly.",
+                "<b>4. Collection Days:</b> <b>Tuesday, Thursday, and Sunday</b> (Place neatly <b>under the utility pole in front of the building entrance</b>).",
+                "<b>5. Extra Bags Location:</b> All trash bags are stocked inside the <b>cabinet under the kitchen sink</b>."
+            ],
+            "checkout_title": "4. Pre-Checkout Checklist (By 11:00 AM)",
+            "checkout_items": [
+                "Wash and put away used dishes/cookware",
+                "Sort and dispose of garbage properly",
+                "Turn off A/C, floor heating (boiler), and all lights",
+                "Close and lock all windows and the front door",
+                "Double-check that no personal belongings are left behind"
             ]
         },
         "story": {
@@ -393,11 +456,16 @@ CONTENT = {
                 "Located in Jegi-dong—where university energy meets authentic traditional markets—"
                 "experience the real rhythm of Seoul."
             ),
-            "rooms_title": "3 Private Bedrooms (Up to 6 Guests)",
+            "rooms_title": "Bedroom Allocation by Guest Count (Up to 6 Guests)",
+            "room_rule_tip": (
+                "🛏️ <b>Bedrooms are prepared based on your reserved guest count:</b><br>"
+                "• <b>Up to 4 Guests:</b> 2 Bedrooms Open (<b>Palette · Amber</b>)<br>"
+                "• <b>5 to 6 Guests:</b> All 3 Bedrooms Open (<b>Palette · Amber · Cozy</b>)"
+            ),
             "rooms": [
                 ("🎨 Room 1 · Palette", "Our main bedroom featuring soft pastel tones and cozy ambient lighting."),
                 ("🕯️ Room 2 · Amber", "Designed with warm wood accents for deep, peaceful rest."),
-                ("☁️ Room 3 · Cozy", "Cloud-soft bedding tailored for a restful night's sleep.")
+                ("☁️ Room 3 · Cozy (Open for 5+ Guests)", "Cloud-soft bedding tailored for a restful night's sleep.")
             ],
             "note": (
                 "※ Officially licensed Foreign Tourist Urban Homestay. "
@@ -434,7 +502,7 @@ CONTENT = {
             ("🔐 ドアロック", "* + 暗証番号 + *"),
             ("📶 Wi-Fi", f"PW: {WIFI_PW}")
         ],
-        "tabs": ["🗺️ アクセス", "🔑 チェックイン", "🏡 ストーリー", "✨ 周辺・交通"],
+        "tabs": ["🗺️ アクセス", "🔑 利用案内・Wi-Fi", "🏡 ストーリー", "✨ 周辺・交通"],
         "location": {
             "taxi_tag": "🚖 タクシー運転手さんにこの画面を見せてください",
             "taxi_sub": "ご案内：タクシーに乗車する際は、下の韓国語住所をそのまま運転手さんにお見せください。",
@@ -453,23 +521,50 @@ CONTENT = {
             "map_note": "地図アプリで開く："
         },
         "checkin": {
-            "door_title": "1. 玄関スマートロックの開け方",
+            "contact_title": "0. お問い合わせ・緊急連絡先",
+            "contact_desc": "ご滞在中に何かございましたら、Airbnbメッセージまたは下記メッセンジャーよりいつでもご連絡ください。",
+            "door_title": "1. 玄関スマートロック & Wi-Fi",
             "door_alert": (
                 "⚠️ <b>暗証番号の前後に必ずアスタリスク(*)を押してください！</b><br>"
                 "入力順：<b>[ * ] + [ 4桁の暗証番号 ] + [ * ]</b>"
             ),
-            "door_desc": (
-                "防犯のため、暗証番号はチェックイン前にAirbnbメッセージでお送りします。"
-                "玄関では靴を脱ぎ、備え付けのスリッパをご利用ください。"
-            ),
-            "wifi_title": "2. 無料高速 Wi-Fi",
-            "wifi_desc": "枠の右上にあるコピーアイコンをタップするとパスワードがコピーされます。",
-            "rules_title": "3. ハウスルール & ゴミ分別",
+            "door_desc": "暗証番号はチェックイン前にAirbnbメッセージでお送りします。右上のコピーアイコンでWi-Fi情報をコピーできます。",
+            "rules_title": "2. ハウスルール（お守りください）",
             "rules": [
+                "<b>お静かに（22:00〜07:00）：</b>夜22時以降は近隣住民へのご配慮をお願いいたします。",
+                "<b>室内では靴を脱ぐ：</b>玄関で靴を脱ぎ、備え付けのスリッパをご利用ください。",
                 "<b>建物内完全禁煙：</b>電子タバコを含め、建物内はすべて禁煙です。",
-                "<b>お静かに：</b>夜22時以降は近隣住民へのご配慮をお願いいたします。",
-                "<b>ゴミの分別：</b>一般ゴミ・資源ゴミ（プラ・缶・瓶）・生ゴミをキッチン横の専用ゴミ箱へ分別してください。",
-                "<b>節電のお願い：</b>外出時はエアコン・オンドル（床暖房）・照明をお切りください。"
+                "<b>匂いの強い料理の禁止：</b>焼き魚や匂いの強い調理はご遠慮ください。",
+                "<b>22時以降の洗濯機使用禁止：</b>夜間の振動・騒音防止のため、22時以降は洗濯機を使用しないでください。",
+                "<b>予約人数以外の立ち入り・宿泊禁止：</b>登録されたゲスト以外の入室は禁止です。",
+                "<b>廊下・階段でもお静かに：</b>集合住宅のため、共用階段・廊下ではお静かにご移動ください。"
+            ],
+            "trash_title": "3. ゴミの分別方法 🗑️",
+            "trash_alert": (
+                "🚫 <b>生ゴミと他のゴミを絶対に混ぜないでください！</b><br>"
+                "韓国のゴミ分別は非常に厳しく、混ぜて捨てると罰金（過怠料）の対象となります。"
+            ),
+            "trash_basic": [
+                "<b>① 生ゴミ（食物残渣）：</b>シンクの上に置かれた<b>生ゴミ専用容器（グリーンカラー）</b>に入れてください。",
+                "<b>② 資源ゴミ（紙・ビニール・缶・瓶・プラスチック）：</b><b>冷蔵庫前の分別ゴミ箱</b>へ種類ごとに入れてください。<i>（※食べ残しや汚れは必ず水で綺麗に洗い流してから捨ててください。）</i>",
+                "<b>③ 一般ゴミ：</b>その他の一般ゴミは<b>Trashゴミ箱</b>へ捨ててください。",
+                "<b>⚠️ 害虫防止のご注意：</b>汚れがついたゴミを室内に長時間放置すると虫が発生する原因になります。長期滞在やゴミが多い場合は必ず屋外の排出場所へお出しください。<i>（未分別・長期放置による虫の発生については責任を負いかねます。）</i>"
+            ],
+            "trash_long_title": "📦 長期滞在（5泊以上）& ゴミ箱がいっぱいになった時の屋外排出方法",
+            "trash_long": [
+                "<b>1. 生ゴミ：</b>小さな生ゴミ専用袋（<b>黄色2ℓ または 緑色3ℓ</b>）に入れてお出しください。",
+                "<b>2. 資源ゴミ：</b>ゴミ箱にセットされている<b>透明の袋のまま</b>口を縛って外へお出しください。",
+                "<b>3. 一般ゴミ（トイレのゴミ含む）：</b><b>白色の従量制ゴミ袋（20ℓ または 50ℓ）</b>に入れて縛り、外へお出しください。",
+                "<b>4. ゴミ出し曜日：</b><b>火曜日・木曜日・日曜日</b>（建物前の入り口、<b>電柱の下</b>に置いてください。）",
+                "<b>5. ゴミ袋の保管場所：</b>すべてのゴミ袋は<b>シンク下の収納棚</b>にご用意しています。"
+            ],
+            "checkout_title": "4. チェックアウト前の確認事項（11:00まで）",
+            "checkout_items": [
+                "使用した食器の洗浄・片付け",
+                "ゴミの分別確認",
+                "エアコン・オンドル（床暖房）・照明の電源オフ",
+                "窓と玄関ドアの施錠確認",
+                "お忘れ物（充電器・パスポートなど）がないか確認"
             ]
         },
         "story": {
@@ -483,11 +578,16 @@ CONTENT = {
                 "高麗大学エリアの活気と京東市場のローカルな情緒が溶け合う祭基洞で、"
                 "暮らすようなソウル旅をお楽しみください。"
             ),
-            "rooms_title": "3つの独立したベッドルーム（最大6名）",
+            "rooms_title": "ご予約人数別の寝室ご案内（最大6名）",
+            "room_rule_tip": (
+                "🛏️ <b>ご予約人数に合わせて寝室をご用意いたします：</b><br>"
+                "• <b>4名様以下：</b>寝室2部屋オープン（<b>パレットルーム · アンバールーム</b>）<br>"
+                "• <b>5名様以上：</b>寝室3部屋すべてオープン（<b>パレット · アンバー · コージールーム</b>）"
+            ),
             "rooms": [
                 ("🎨 Room 1 · Palette（パレット）", "柔らかな色合いと心地よい照明が調和するメイン寝室です。"),
                 ("🕯️ Room 2 · Amber（アンバー）", "温かみのあるウッド調で落ち着いた休息にぴったりの寝室です。"),
-                ("☁️ Room 3 · Cozy（コージー）", "雲のようにふわふわの寝具で深い眠りをサポートする寝室です。")
+                ("☁️ Room 3 · Cozy（コージー · 5名以上でオープン）", "雲のようにふわふわの寝具で深い眠りをサポートする寝室です。")
             ],
             "note": (
                 "※ 正式認可を受けた外国人観光都市民泊施設です。"
@@ -524,7 +624,7 @@ CONTENT = {
             ("🔐 密码锁", "* + 密码 + *"),
             ("📶 Wi-Fi", f"PW: {WIFI_PW}")
         ],
-        "tabs": ["🗺️ 交通路线", "🔑 入住·Wi-Fi", "🏡 空间故事", "✨ 周边·公交"],
+        "tabs": ["🗺️ 交通路线", "🔑 入住·使用指南", "🏡 空间故事", "✨ 周边·公交"],
         "location": {
             "taxi_tag": "🚖 请向出租车司机出示此屏幕",
             "taxi_sub": "温馨提示：搭乘出租车时，直接将下方韩文地址展示给司机即可。",
@@ -543,23 +643,50 @@ CONTENT = {
             "map_note": "点击下方按钮直接打开地图导航："
         },
         "checkin": {
-            "door_title": "1. 智能门锁与入住指南",
+            "contact_title": "0. 咨询及紧急联系方式",
+            "contact_desc": "入住期间如有任何需要，请随时通过Airbnb私信或以下社交软件联系我们：",
+            "door_title": "1. 智能门锁与 Wi-Fi 指南",
             "door_alert": (
                 "⚠️ <b>输入密码前后，请务必按下星号键 (*)！</b><br>"
                 "正确顺序：<b>[ * ] + [ 4位数字密码 ] + [ * ]</b>"
             ),
-            "door_desc": (
-                "为保障安全，您的专属密码将在入住前通过Airbnb私信发送。"
-                "进门后请脱下室外鞋，换上玄关准备的室内拖鞋。"
-            ),
-            "wifi_title": "2. 免费高速 Wi-Fi",
-            "wifi_desc": "点击下方框体右上角的复制图标即可一键复制密码。",
-            "rules_title": "3. 住宿守则与垃圾分类",
+            "door_desc": "专属门锁密码将在入住前通过Airbnb私信发送。点击下方复制图标即可一键复制Wi-Fi信息。",
+            "rules_title": "2. 请共同遵守（住宿守则）",
             "rules": [
-                "<b>室内严禁吸烟：</b>整栋建筑（含电子烟）全面禁烟。",
-                "<b>安静时间：</b>晚上22:00后请降低音量，以免打扰邻里休息。",
-                "<b>垃圾分类：</b>请将一般垃圾、可回收物（塑料/易拉罐/玻璃）及厨余垃圾分别放入厨房旁的分类桶中。",
-                "<b>节约能源：</b>外出时请关闭空调、地暖（锅炉）和室内灯光。"
+                "<b>安静时间 (22:00 ~ 07:00)：</b>晚上22:00后请降低音量，以免打扰邻里休息。",
+                "<b>室内请脱鞋：</b>进门后请在玄关脱下室外鞋，换穿室内拖鞋。",
+                "<b>整栋建筑全面禁烟：</b>包括电子烟在内，室内及整栋楼严禁吸烟。",
+                "<b>禁止烹饪气味强烈的食物：</b>为保持室内空气清新，请勿煎烤鱼类或烹制重油烟食物。",
+                "<b>22:00后禁止使用洗衣机：</b>为防止夜间震动与噪音扰民，晚上10点后请勿运行洗衣机。",
+                "<b>禁止非预订人员访问或留宿：</b>严禁未经登记的访客入内或留宿。",
+                "<b>走廊和楼梯也请保持安静：</b>本建筑为居民楼，进出经过楼梯和走廊时请轻声慢行。"
+            ],
+            "trash_title": "3. 垃圾分类指南 🗑️",
+            "trash_alert": (
+                "🚫 <b>切勿将厨余垃圾与其他垃圾混合投放！</b><br>"
+                "韩国垃圾分类法规非常严格，违规混合投放将面临罚款。"
+            ),
+            "trash_basic": [
+                "<b>① 厨余垃圾：</b>请倒入水槽上方放置的<b>绿色厨余垃圾专用桶</b>内。",
+                "<b>② 可回收垃圾（纸类/塑料袋/易拉罐/玻璃瓶/塑料瓶）：</b>请按类别放入<b>冰箱前方的分类垃圾桶</b>。<i>（※沾有食物残渣的容器，请务必用水冲洗干净后再投放。）</i>",
+                "<b>③ 一般垃圾：</b>其他不可回收垃圾请放入 <b>Trash 垃圾桶</b>。",
+                "<b>⚠️ 防虫提示：</b>沾有食物的垃圾若长时间留在室内极易滋生虫害。长住或垃圾较多时请务必及时丢弃至室外指定地点。<i>（因未分类或长期放置导致的虫害问题，民宿恕不负责。）</i>"
+            ],
+            "trash_long_title": "📦 长住客人（5晚以上）及垃圾桶装满时的室外投放方法",
+            "trash_long": [
+                "<b>1. 厨余垃圾：</b>请装入小型厨余专用袋（<b>黄色2ℓ 或 绿色3ℓ</b>）中扎紧丢弃。",
+                "<b>2. 可回收垃圾：</b>直接将分类桶内套好的<b>透明塑料袋</b>扎紧拿到室外丢弃即可。",
+                "<b>3. 一般垃圾（含卫生间垃圾）：</b>请装入<b>白色计量垃圾袋（20ℓ 或 50ℓ）</b>扎紧后拿到室外丢弃。",
+                "<b>4. 垃圾投放日：</b><b>每周二、周四、周日</b>（请放置于<b>建筑正门入口处的电线杆下方</b>。）",
+                "<b>5. 垃圾袋存放位置：</b>所有备用垃圾袋均存放在<b>厨房水槽下方的橱柜内</b>。"
+            ],
+            "checkout_title": "4. 退房前确认清单（11:00前）",
+            "checkout_items": [
+                "清洗并整理使用过的餐具",
+                "确认已完成垃圾分类",
+                "关闭空调、地暖（锅炉）及所有灯光",
+                "确认门窗已关好并锁好大门",
+                "检查是否有遗漏的随身物品（充电器、护照等）"
             ]
         },
         "story": {
@@ -572,11 +699,16 @@ CONTENT = {
                 "坐落于高丽大学青春活力与京东市场烟火气交融的祭基洞，"
                 "带您体验最地道的首尔生活。"
             ),
-            "rooms_title": "3间独立卧室布局（最多6人）",
+            "rooms_title": "按入住人数开放卧室说明（最多6人）",
+            "room_rule_tip": (
+                "🛏️ <b>我们将根据您的预订人数准备相应卧室：</b><br>"
+                "• <b>4人及以下预订：</b>开放2间卧室（<b>调色盘房 · 琥珀房</b>）<br>"
+                "• <b>5人及以上预订：</b>开放全部3间卧室（<b>调色盘房 · 琥珀房 · 惬意房</b>）"
+            ),
             "rooms": [
-                ("🎨 Room 1 · Palette（调色盘）", "柔和色彩与温馨灯光交织的主卧室。"),
-                ("🕯️ Room 2 · Amber（琥珀）", "温暖木质色调，专注于安静放松的独立卧室。"),
-                ("☁️ Room 3 · Cozy（惬意）", "云朵般柔软亲肤的床品，助您一夜好眠。")
+                ("🎨 Room 1 · Palette（调色盘房）", "柔和色彩与温馨灯光交织的主卧室。"),
+                ("🕯️ Room 2 · Amber（琥珀房）", "温暖木质色调，专注于安静放松的独立卧室。"),
+                ("☁️ Room 3 · Cozy（惬意房 · 5人以上开放）", "云朵般柔软亲肤的床品，助您一夜好眠。")
             ],
             "note": (
                 "※ 本民宿为政府正式注册的合法外国人观光城市民宿。"
@@ -649,7 +781,7 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------------------------------------------------------
-# 5. 메인 4개 탭 구성 (오시는 길 최우선 배치)
+# 5. 메인 4개 탭 구성
 # ---------------------------------------------------------
 tab1, tab2, tab3, tab4 = st.tabs(t["tabs"])
 
@@ -696,9 +828,20 @@ with tab1:
     with col2:
         st.link_button("🔵 Google Maps", "https://www.google.com/maps/search/?api=1&query=3+Anam-ro+18-gil+Dongdaemun-gu+Seoul", use_container_width=True)
 
-# [TAB 2] 체크인 · Wi-Fi
+# [TAB 2] 체크인 · 이용안내 · 분리수거 · 체크아웃
 with tab2:
     c = t["checkin"]
+
+    # 0. 비상 연락처
+    st.markdown(f"""
+    <div class="info-card">
+        <h3>{c['contact_title']}</h3>
+        <p>{c['contact_desc']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+    st.code(f"WeChat ID   : {WECHAT_ID}\nLINE ID     : {LINE_ID}\nKakaoTalk ID: {KAKAO_ID}", language="text")
+
+    # 1. 도어락 & Wi-Fi
     st.markdown(f"""
     <div class="info-card">
         <h3>{c['door_title']}</h3>
@@ -706,15 +849,9 @@ with tab2:
         <p>{c['door_desc']}</p>
     </div>
     """, unsafe_allow_html=True)
+    st.code(f"5G Wi-Fi  : {WIFI_5G}\n2.4G Wi-Fi: {WIFI_24G}\nPassword  : {WIFI_PW}", language="text")
 
-    st.markdown(f"""
-    <div class="info-card">
-        <h3>{c['wifi_title']}</h3>
-        <p>{c['wifi_desc']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-    st.code(f"Wi-Fi ID : {WIFI_ID}\nPassword : {WIFI_PW}", language="text")
-
+    # 2. 함께 지켜주세요
     rules_html = "".join([f"<li>{item}</li>" for item in c["rules"]])
     st.markdown(f"""
     <div class="info-card">
@@ -723,7 +860,30 @@ with tab2:
     </div>
     """, unsafe_allow_html=True)
 
-# [TAB 3] 공간 스토리
+    # 3. 쓰레기 분리수거 & 장기숙박 외부 배출 아코디언
+    trash_basic_html = "".join([f"<p>{item}</p>" for item in c["trash_basic"]])
+    st.markdown(f"""
+    <div class="info-card" style="margin-bottom:0.5rem;">
+        <h3>{c['trash_title']}</h3>
+        <div class="alert-box">{c['trash_alert']}</div>
+        {trash_basic_html}
+    </div>
+    """, unsafe_allow_html=True)
+
+    trash_long_html = "".join([f"<li>{item}</li>" for item in c["trash_long"]])
+    with st.expander(c["trash_long_title"]):
+        st.markdown(f"<ul style='padding-left:1.2rem; margin:0; font-size:0.9rem; line-height:1.6;'>{trash_long_html}</ul>", unsafe_allow_html=True)
+
+    # 4. 체크아웃 전 확인
+    checkout_html = "".join([f"<li>☑️ {item}</li>" for item in c["checkout_items"]])
+    st.markdown(f"""
+    <div class="info-card" style="margin-top:0.85rem;">
+        <h3>{c['checkout_title']}</h3>
+        <ul style="list-style:none; padding-left:0.2rem; margin:0;">{checkout_html}</ul>
+    </div>
+    """, unsafe_allow_html=True)
+
+# [TAB 3] 공간 스토리 & 인원별 객실 안내
 with tab3:
     s = t["story"]
     st.markdown(f"""
@@ -742,6 +902,7 @@ with tab3:
     st.markdown(f"""
     <div class="info-card">
         <h3>{s['rooms_title']}</h3>
+        <div class="tip-box">{s['room_rule_tip']}</div>
         {rooms_html}
     </div>
     """, unsafe_allow_html=True)
