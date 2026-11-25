@@ -127,7 +127,7 @@ CONTENT = {
         "t1_time_title": "⏰ 입·퇴실 시간 안내",
         "t1_time_body": "• <b>체크인 (Check-in):</b> 오후 3:00 (15:00) 이후<br>• <b>체크아웃 (Check-out):</b> 오전 11:00 (11:00) 이전<br><span style='font-size: 13px; color: #888;'>※ 다음 게스트를 위한 침구 교체 및 방역 청소를 위해 퇴실 시간을 꼭 지켜주세요.</span>",
         "t1_wifi_title": "📶 초고속 무선 인터넷 연결",
-        "t1_wifi_body": "아래 정보를 확인하여 무료 Wi-Fi에 연결하세요. (우측 복사 아이콘 클릭 가능)",
+        "t1_wifi_body": ""t1_wifi_body": "아래 정보를 확인하여 무료 Wi-Fi에 연결하세요. (2.4G: U+Net1825 / 우측 복사 아이콘 클릭 가능)",
         "t1_wifi_ssid": "네트워크 이름 (SSID)",
         "t1_wifi_pw": "비밀번호 (Password)",
         "t1_rules_title": "🌿 쾌적한 머무름을 위한 약속",
@@ -160,7 +160,7 @@ CONTENT = {
         "t1_time_title": "⏰ Check-in & Check-out",
         "t1_time_body": "• <b>Check-in:</b> After 3:00 PM (15:00)<br>• <b>Check-out:</b> Before 11:00 AM (11:00)<br><span style='font-size: 13px; color: #888;'>※ Please adhere to check-out time for thorough cleaning and fresh bedding preparation.</span>",
         "t1_wifi_title": "📶 Free High-Speed Wi-Fi",
-        "t1_wifi_body": "Connect to our complimentary Wi-Fi below. (Click the copy icon on the right)",
+        "t1_wifi_body": "Connect to our free Wi-Fi below. (2.4G: U+Net1825 / Tap copy icon on the right)",
         "t1_wifi_ssid": "Network Name (SSID)",
         "t1_wifi_pw": "Password",
         "t1_rules_title": "🌿 House Rules",
@@ -193,7 +193,7 @@ CONTENT = {
         "t1_time_title": "⏰ チェックイン・チェックアウト",
         "t1_time_body": "• <b>チェックイン:</b> 15:00以降<br>• <b>チェックアウト:</b> 11:00まで<br><span style='font-size: 13px; color: #888;'>※ 次のゲストのための清掃・寝具交換のため、チェックアウト時間をお守りください。</span>",
         "t1_wifi_title": "📶 無料高速Wi-Fi",
-        "t1_wifi_body": "以下の情報で無料Wi-Fiに接続できます。（右側のアイコンでコピー可能）",
+        "t1_wifi_body": "以下の情報で無料Wi-Fiに接続できます。（2.4G: U+Net1825 / 右側アイコンでコピー可能）",
         "t1_wifi_ssid": "ネットワーク名 (SSID)",
         "t1_wifi_pw": "パスワード (Password)",
         "t1_rules_title": "🌿 快適にお過ごしいただくためのお願い",
@@ -226,7 +226,7 @@ CONTENT = {
         "t1_time_title": "⏰ 入住与退房时间",
         "t1_time_body": "• <b>入住时间 (Check-in):</b> 下午 3:00 (15:00) 以后<br>• <b>退房时间 (Check-out):</b> 上午 11:00 (11:00) 以前<br><span style='font-size: 13px; color: #888;'>※ 为确保下一位客人的床品更换与全面消毒，请务必准时退房。</span>",
         "t1_wifi_title": "📶 免费高速 Wi-Fi",
-        "t1_wifi_body": "请使用以下信息连接免费无线网络（点击右侧图标可直接复制）。",
+        "t1_wifi_body": "请使用以下信息连接免费Wi-Fi。（2.4G: U+Net1825 / 点击右侧图标可复制）",
         "t1_wifi_ssid": "网络名称 (SSID)",
         "t1_wifi_pw": "密码 (Password)",
         "t1_rules_title": "🌿 住宿公约",
@@ -296,10 +296,10 @@ with tab_home:
     col1, col2 = st.columns(2)
     with col1:
         st.caption(t['t1_wifi_ssid'])
-        st.code("mongle_stay_5G", language=None)
+        st.code("U+Net1825_5G (5G) / U+Net1825 (2.4G)", language=None)
     with col2:
         st.caption(t['t1_wifi_pw'])
-        st.code("mongle1004", language=None)
+        st.code("42155551M#", language=None)
 
     st.markdown(f"""
     <div class="info-card">
