@@ -127,7 +127,7 @@ CONTENT = {
         "t1_time_title": "⏰ 입·퇴실 시간 안내",
         "t1_time_body": "• <b>체크인 (Check-in):</b> 오후 3:00 (15:00) 이후<br>• <b>체크아웃 (Check-out):</b> 오전 11:00 (11:00) 이전<br><span style='font-size: 13px; color: #888;'>※ 다음 게스트를 위한 침구 교체 및 방역 청소를 위해 퇴실 시간을 꼭 지켜주세요.</span>",
         "t1_wifi_title": "📶 초고속 무선 인터넷 연결",
-        "t1_wifi_body": ""t1_wifi_body": "아래 정보를 확인하여 무료 Wi-Fi에 연결하세요. (2.4G: U+Net1825 / 우측 복사 아이콘 클릭 가능)",
+        "t1_wifi_body": "아래 정보를 확인하여 무료 Wi-Fi에 연결하세요. (2.4G: U+Net1825 / 우측 복사 아이콘 클릭 가능)",
         "t1_wifi_ssid": "네트워크 이름 (SSID)",
         "t1_wifi_pw": "비밀번호 (Password)",
         "t1_rules_title": "🌿 쾌적한 머무름을 위한 약속",
