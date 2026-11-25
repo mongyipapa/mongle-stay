@@ -169,24 +169,38 @@ CONTENT = {
         "t2_sub_body": "• <b>지하철 6호선 안암역(고대병원앞) 3번 출구</b>로 나오세요.<br>• 3번 출구에서 안암오거리·제기시장 방면으로 직진 후 <b>안암로18길</b> 골목으로 진입하시면 <b>도보 약 5분</b> 거리에 '고려맨션' 건물이 위치해 있습니다. (2층 203호)",
         "t2_air_title": "✈️ 공항에서 오시는 방법",
         "t2_air_body": "<b>1. 인천국제공항 (ICN) 출발 (약 75~85분 소요)</b><br>• <b>공항철도 + 지하철 (추천):</b> 공항철도 탑승 ➔ <b>공덕역</b> 또는 <b>디지털미디어시티(DMC)역</b>에서 <b>6호선(신내 방면)</b> 환승 ➔ <b>안암역</b> 하차 (3번 출구 도보 5분)<br>• <b>공항리무진 버스:</b> 6002번 탑승 ➔ '제기동역.서울약령시' 하차 후 택시 기본요금 이동 (약 5분)<br><br><b>2. 김포국제공항 (GMP) 출발 (약 55분 소요)</b><br>• 공항철도 탑승 ➔ <b>디지털미디어시티(DMC)역</b>에서 <b>6호선</b> 환승 ➔ <b>안암역</b> 하차",
-        # TAB 3: 체크인 · 도어락 · Wi-Fi
+        # TAB 3: 체크인 · 도어락 · Wi-Fi · 규칙
         "t3_time_title": "⏰ 입·퇴실 및 현관 도어락 출입 안내",
         "t3_time_body": """
-        • <b>체크인 (Check-in):</b> 오후 3:00 (15:00) 이후<br>
-        • <b>체크아웃 (Check-out):</b> 오전 11:00 (11:00) 이전<br>
+        • <b>체크인 (Check-in):</b> 오후 3:00 (15:00) 이후 &nbsp;|&nbsp; <b>체크아웃:</b> 오전 11:00 이전<br>
         <div class='doorlock-box'>
             <b>🔐 현관 도어락 여는 법 (셀프 체크인)</b><br>
-            1. 체크인 당일 예약 플랫폼(에어비앤비/트립닷컴/부킹닷컴) 메시지로 발송된 <b>개별 비밀번호</b>를 확인해 주세요.<br>
-            2. 도어락 화면을 손바닥으로 터치해 불을 켠 뒤 ➔ <b><code>*</code> + <code>비밀번호</code> + <code>*</code></b> 순서대로 누르시면 문이 열립니다.<br>
-            <span style='font-size: 12.5px; color: #5F6368;'>※ 앞뒤로 별표(*)를 꼭 함께 눌러주세요. 외출 시 문이 닫히면 자동으로 잠깁니다.</span>
+            1. 체크인 당일 예약 플랫폼 메시지로 발송된 <b>개별 비밀번호</b>를 확인해 주세요.<br>
+            2. 화면을 손바닥으로 터치해 불을 켠 뒤 ➔ <b><code>*</code> + <code>비밀번호</code> + <code>*</code></b> 순서대로 누르세요.<br>
+            <span style='font-size: 12.5px; color: #5F6368;'>※ 앞뒤로 별표(*)를 꼭 함께 눌러야 열리며, 닫히면 자동으로 잠깁니다.</span>
         </div>
         """,
         "t3_wifi_title": "📶 초고속 무선 인터넷 연결",
         "t3_wifi_body": "원하시는 Wi-Fi와 비밀번호 우측의 복사 아이콘을 눌러 연결하세요.",
         "t3_wifi_ssid": "네트워크 이름 (SSID)",
         "t3_wifi_pw": "비밀번호 (5G · 2.4G 공통)",
-        "t3_rules_title": "🌿 쾌적한 머무름을 위한 약속",
-        "t3_rules_body": "1. <b>실내 절대 금연:</b> 건물 전체 및 객실 내 흡연(전자담배 포함)은 엄격히 금지됩니다.<br>2. <b>실내화 착용:</b> 현관에서 신발을 벗고 비치된 실내화를 착용해 주세요.<br>3. <b>정숙 시간:</b> 밤 10시(22:00) 이후에는 이웃을 위해 TV 볼륨과 대화를 낮춰주시고, 세탁기 사용을 자제해 주세요.<br>4. <b>요리 및 분리수거:</b> 냄새가 강한 요리는 삼가주시고, 쓰레기는 주방 옆 전용함에 분리배출해 주세요.<br>5. <b>외출 시 전원 확인:</b> 외출하실 때는 냉난방기 및 인덕션 전원을 꼭 꺼주세요.",
+        "t3_rules_title": "🌿 함께 지켜주세요 (House Rules)",
+        "t3_rules_body": "• <b>숙소 전체 금연:</b> 실내 및 건물 내 흡연(전자담배 포함) 절대 금지<br>• <b>실내화 착용:</b> 현관에서 신발을 벗고 비치된 실내화를 착용해 주세요.<br>• <b>정숙 시간 (22:00~07:00):</b> 복도·계단에서도 조용히 이동해 주시고, 밤 10시 이후 세탁기 사용은 자제해 주세요.<br>• <b>출입 및 요리:</b> 예약 인원 외 방문·숙박은 불가하며, 냄새가 강한 요리는 삼가주세요.",
+        "t3_trash_exp": "♻️ 쓰레기 분리수거 & 장기숙박 배출 안내 (사진 보기)",
+        "t3_trash_body": """
+        한국은 쓰레기 분리수거가 엄격하며, 음식물과 일반 쓰레기를 섞어 버릴 경우 과태료가 부과됩니다.<br><br>
+        <b>1. 실내 분리수거 방법</b><br>
+        • <b>음식물 쓰레기:</b> 싱크대 위 <b>그린 컬러 전용통</b>에 버려주세요.<br>
+        • <b>재활용품 (종이·비닐·캔·병·플라스틱):</b> 내용물을 깨끗이 비우고 헹군 뒤 냉장고 옆 <b>4단 분리수거함</b>에 종류별로 넣어주세요.<br>
+        • <b>일반 쓰레기:</b> 그 외 일반 쓰레기(화장실 휴지 포함)는 <b>Trash 수거함</b>에 버려주세요.<br><br>
+        <b>2. 장기 숙박(5박 이상) 및 수거함이 가득 찼을 때</b><br>
+        • 여분 쓰레기봉투는 <b>싱크대 하부</b>에 준비되어 있습니다. (배출 요일: <b>화 · 목 · 일</b>)<br>
+        • <b>음식물:</b> 노랑/초록 전용봉투(2ℓ·3ℓ) / <b>재활용:</b> 투명 비닐 그대로 / <b>일반:</b> 흰색 종량제 봉투(20ℓ·50ℓ)에 담아 묶은 뒤 <b>건물 앞 전봇대 밑</b>(아래 오른쪽 사진 파란 원 위치)에 놓아주세요.
+        """,
+        "t3_trash_cap1": "실내 4단 분리수거함 (냉장고 옆)",
+        "t3_trash_cap2": "외부 배출 장소 (화·목·일 배출)",
+        "t3_checkout_title": "✅ 체크아웃 전 10초 확인",
+        "t3_checkout_body": "1. 사용한 식기 세척 및 정리 &nbsp; 2. 쓰레기 분리수거<br>3. 에어컨·보일러·조명 전원 끄기 &nbsp; 4. 창문 및 현관문 잠금 확인 &nbsp; 5. 잊은 물건 확인",
         "t3_contact_title": "🐶 호스트 긴급 연락처",
         "t3_contact_body": "머무시는 동안 도움이 필요하시면 언제든 편하게 연락해 주세요.<br>• <b>예약 플랫폼 메시지:</b> 에어비앤비 / 트립닷컴 / 부킹닷컴 앱 내 채팅 (가장 빠름)<br>• <b>메신저 문의:</b> WeChat: <code>mongle-stay</code> / LINE: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
         # TAB 4: 로컬 명소 & 교통 꿀팁
@@ -233,13 +247,12 @@ CONTENT = {
         # TAB 3
         "t3_time_title": "⏰ Check-in, Check-out & Door Lock Guide",
         "t3_time_body": """
-        • <b>Check-in:</b> After 3:00 PM (15:00)<br>
-        • <b>Check-out:</b> Before 11:00 AM (11:00)<br>
+        • <b>Check-in:</b> After 3:00 PM (15:00) &nbsp;|&nbsp; <b>Check-out:</b> Before 11:00 AM (11:00)<br>
         <div class='doorlock-box'>
             <b>🔐 How to Unlock the Front Door (Self Check-in)</b><br>
-            1. Check your <b>unique passcode</b> sent via booking platform message (Airbnb / Trip.com / Booking.com) on your check-in day.<br>
+            1. Check your <b>unique passcode</b> sent via booking platform message on your check-in day.<br>
             2. Touch the keypad with your palm to wake the screen ➔ Enter <b><code>*</code> + <code>Passcode</code> + <code>*</code></b> to unlock.<br>
-            <span style='font-size: 12.5px; color: #5F6368;'>※ Be sure to press the asterisk (*) both before and after the passcode. The door locks automatically when closed.</span>
+            <span style='font-size: 12.5px; color: #5F6368;'>※ Press the asterisk (*) both before and after the passcode. The door locks automatically when closed.</span>
         </div>
         """,
         "t3_wifi_title": "📶 Free High-Speed Wi-Fi",
@@ -247,7 +260,22 @@ CONTENT = {
         "t3_wifi_ssid": "Network Name (SSID)",
         "t3_wifi_pw": "Password (Shared for 5G & 2.4G)",
         "t3_rules_title": "🌿 House Rules",
-        "t3_rules_body": "1. <b>No Smoking:</b> Smoking (including e-cigarettes) is strictly prohibited inside the room and building.<br>2. <b>Shoes Off Indoors:</b> Please take off your shoes at the entrance and wear the provided indoor slippers.<br>3. <b>Quiet Hours:</b> Please keep noise down after 10:00 PM (22:00) and avoid using the washing machine late at night.<br>4. <b>Cooking & Recycling:</b> Please avoid strong-smelling cooking and separate waste into the bins next to the kitchen.<br>5. <b>Save Energy:</b> Please turn off the A/C, heater, and induction stove when leaving the room.",
+        "t3_rules_body": "• <b>No Smoking:</b> Strictly prohibited inside the room and building (including e-cigarettes).<br>• <b>Shoes Off Indoors:</b> Please take off your shoes at the entrance and wear the provided slippers.<br>• <b>Quiet Hours (22:00–07:00):</b> Please walk quietly in hallways/stairs and avoid using the washing machine after 10 PM.<br>• <b>Visitors & Cooking:</b> Unregistered guests are not allowed, and please avoid strong-smelling cooking.",
+        "t3_trash_exp": "♻️ Trash Sorting & Long-Stay Disposal Guide (View Photos)",
+        "t3_trash_body": """
+        Korea enforces strict waste sorting; mixing food waste with general trash incurs fines.<br><br>
+        <b>1. Indoor Sorting</b><br>
+        • <b>Food Waste:</b> Dispose in the <b>green bin</b> on the kitchen sink.<br>
+        • <b>Recycling (Paper, Vinyl, Cans, Glass, Plastic):</b> Rinse clean and place in the <b>4-tier recycling bin</b> next to the fridge.<br>
+        • <b>General Waste:</b> Put other general trash (including bathroom tissue) in the <b>Trash bin</b>.<br><br>
+        <b>2. Long Stays (5+ Nights) & When Bins Are Full</b><br>
+        • Extra trash bags are stored <b>under the sink</b>. (Collection days: <b>Tue · Thu · Sun</b>)<br>
+        • Tie bags securely—<b>Food:</b> Yellow/Green bag (2L/3L), <b>Recycling:</b> Clear bag as-is, <b>General:</b> White volume-rate bag (20L/50L)—and place them <b>under the utility pole in front of the building</b> (blue circle in the right photo).
+        """,
+        "t3_trash_cap1": "Indoor 4-Tier Recycling Bin (Next to Fridge)",
+        "t3_trash_cap2": "Outdoor Drop-off Spot (Tue · Thu · Sun)",
+        "t3_checkout_title": "✅ 10-Second Check-out Checklist",
+        "t3_checkout_body": "1. Wash & put away used dishes &nbsp; 2. Sort trash properly<br>3. Turn off A/C, heater & lights &nbsp; 4. Close windows & lock front door &nbsp; 5. Check for left items",
         "t3_contact_title": "🐶 Host Contact",
         "t3_contact_body": "Feel free to reach out anytime if you need assistance during your stay.<br>• <b>Booking Platform Chat:</b> Airbnb / Trip.com / Booking.com in-app message (Fastest)<br>• <b>Messenger ID:</b> WeChat: <code>mongle-stay</code> / LINE: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
         # TAB 4
@@ -294,21 +322,35 @@ CONTENT = {
         # TAB 3
         "t3_time_title": "⏰ チェックイン・チェックアウト＆ドアロック案内",
         "t3_time_body": """
-        • <b>チェックイン:</b> 15:00以降<br>
-        • <b>チェックアウト:</b> 11:00まで<br>
+        • <b>チェックイン:</b> 15:00以降 &nbsp;|&nbsp; <b>チェックアウト:</b> 11:00まで<br>
         <div class='doorlock-box'>
             <b>🔐 玄関ドアロックの開け方（セルフチェックイン）</b><br>
-            1. チェックイン当日に予約サイト（Airbnb / Trip.com / Booking.com）のメッセージでお送りする<b>個別暗証番号</b>をご確認ください。<br>
-            2. ドアロック画面を手のひらでタッチして点灯させた後 ➔ <b><code>*</code> + <code>暗証番号</code> + <code>*</code></b> の順に押すと解錠されます。<br>
-            <span style='font-size: 12.5px; color: #5F6368;'>※ 暗証番号の前後両方にアスタリスク(*)を押してください。ドアが閉まると自動で施錠されます。</span>
+            1. チェックイン当日に予約サイトのメッセージでお送りする<b>個別暗証番号</b>をご確認ください。<br>
+            2. 画面を手のひらでタッチして点灯させた後 ➔ <b><code>*</code> + <code>暗証番号</code> + <code>*</code></b> の順に押すと解錠されます。<br>
+            <span style='font-size: 12.5px; color: #5F6368;'>※ 前後両方にアスタリスク(*)を押してください。ドアが閉まると自動で施錠されます。</span>
         </div>
         """,
         "t3_wifi_title": "📶 無料高速Wi-Fi",
         "t3_wifi_body": "ご希望のWi-Fiとパスワード右側のコピーアイコンを押して接続してください。",
         "t3_wifi_ssid": "ネットワーク名 (SSID)",
         "t3_wifi_pw": "パスワード（5G・2.4G共通）",
-        "t3_rules_title": "🌿 快適にお過ごしいただくためのお願い",
-        "t3_rules_body": "1. <b>室内完全禁煙:</b> 建物全体および客室内での喫煙（電子タバコ含む）は固くお断りいたします。<br>2. <b>室内履き着用:</b> 玄関で靴を脱ぎ、備え付けのスリッパをご利用ください。<br>3. <b>お静かに:</b> 22時以降は近隣住民への配慮のためお静かにお過ごしいただき、洗濯機の使用はお控えください。<br>4. <b>調理＆ゴミ分別:</b> 匂いの強い調理はご遠慮いただき、ゴミはキッチン横の専用ゴミ箱へ分別をお願いします。<br>5. <b>外出時の電源オフ:</b> お出かけの際はエアコン・暖房・IHコンロの電源を必ずお切りください。",
+        "t3_rules_title": "🌿 快適にお過ごしいただくためのお願い (House Rules)",
+        "t3_rules_body": "• <b>室内完全禁煙:</b> 建物全体および客室内での喫煙（電子タバコ含む）は厳禁です。<br>• <b>室内履き着用:</b> 玄関で靴を脱ぎ、備え付けのスリッパをご利用ください。<br>• <b>お静かに (22:00〜07:00):</b> 廊下・階段でも静かに移動し、22時以降の洗濯機使用はお控えください。<br>• <b>入室・調理制限:</b> 予約人数以外の訪問・宿泊は禁止です。匂いの強い調理はご遠慮ください。",
+        "t3_trash_exp": "♻️ ゴミの分別＆長期滞在時のゴミ出し案内（写真を見る）",
+        "t3_trash_body": """
+        韓国ではゴミの分別が厳格で、生ゴミと一般ゴミを混ぜると罰金の対象となります。<br><br>
+        <b>1. 室内の分別方法</b><br>
+        • <b>生ゴミ:</b> シンク上の<b>グリーン色の専用容器</b>に入れてください。<br>
+        • <b>資源ゴミ（紙・ビニール・缶・瓶・プラスチック）:</b> 中身を洗ってから冷蔵庫横の<b>4段分別ゴミ箱</b>へ種類別に入れてください。<br>
+        • <b>一般ゴミ:</b> その他の一般ゴミ（トイレの紙を含む）は <b>Trash ゴミ箱</b>へ捨ててください。<br><br>
+        <b>2. 長期滞在（5泊以上）＆ゴミ箱がいっぱいになった場合</b><br>
+        • 予備のゴミ袋は<b>シンク下</b>にございます。（ゴミ出し曜日：<b>火・木・日</b>）<br>
+        • <b>生ゴミ:</b> 黄色/緑の専用袋(2ℓ・3ℓ) / <b>資源ゴミ:</b> 透明袋のまま / <b>一般ゴミ:</b> 白色の従量制袋(20ℓ・50ℓ)に入れて口を縛り、<b>建物前の電柱の下</b>（右写真の青い丸の場所）に出してください。
+        """,
+        "t3_trash_cap1": "室内4段分別ゴミ箱（冷蔵庫横）",
+        "t3_trash_cap2": "屋外ゴミ出し場所（火・木・日）",
+        "t3_checkout_title": "✅ チェックアウト前の10秒確認",
+        "t3_checkout_body": "1. 使用した食器の洗浄・整理 &nbsp; 2. ゴミの分別<br>3. エアコン・暖房・照明の電源オフ &nbsp; 4. 窓と玄関ドアの施錠確認 &nbsp; 5. 忘れ物チェック",
         "t3_contact_title": "🐶 ホスト連絡先",
         "t3_contact_body": "ご滞在中に何かお困りの際は、いつでもお気軽にご連絡ください。<br>• <b>予約サイトメッセージ:</b> Airbnb / Trip.com / Booking.com アプリ内チャット（最速）<br>• <b>メッセンジャーID:</b> LINE: <code>mongle-stay</code> / WeChat: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
         # TAB 4
@@ -355,11 +397,10 @@ CONTENT = {
         # TAB 3
         "t3_time_title": "⏰ 入住退房时间 & 门锁密码开锁指南",
         "t3_time_body": """
-        • <b>入住时间 (Check-in):</b> 下午 3:00 (15:00) 以后<br>
-        • <b>退房时间 (Check-out):</b> 上午 11:00 (11:00) 以前<br>
+        • <b>入住时间 (Check-in):</b> 下午 3:00 (15:00) 以后 &nbsp;|&nbsp; <b>退房时间:</b> 上午 11:00 以前<br>
         <div class='doorlock-box'>
             <b>🔐 大门电子密码锁开锁方法（自助入住）</b><br>
-            1. 入住当天请查看预订平台（Airbnb / 携程 Trip.com / Booking.com）私信发送给您的<b>专属密码</b>。<br>
+            1. 入住当天请查看预订平台私信发送给您的<b>专属密码</b>。<br>
             2. 用手掌轻触门锁屏幕唤醒灯光 ➔ 依次输入 <b><code>*</code> + <code>专属密码</code> + <code>*</code></b> 即可开锁。<br>
             <span style='font-size: 12.5px; color: #5F6368;'>※ 请务必在密码前后都按星号(*)。关门后门锁会自动上锁。</span>
         </div>
@@ -368,8 +409,23 @@ CONTENT = {
         "t3_wifi_body": "请点击所需Wi-Fi及密码右侧的复制图标进行连接。",
         "t3_wifi_ssid": "网络名称 (SSID)",
         "t3_wifi_pw": "密码（5G与2.4G通用）",
-        "t3_rules_title": "🌿 住宿公约",
-        "t3_rules_body": "1. <b>室内绝对禁烟:</b> 整栋建筑及房间内严禁吸烟（包括电子烟）。<br>2. <b>室内更换拖鞋:</b> 请在玄关脱鞋并换穿室内拖鞋。<br>3. <b>保持安静:</b> 晚上10点（22:00）以后请调低音量，并请勿使用洗衣机。<br>4. <b>烹饪与垃圾分类:</b> 请避免油烟或气味较大的烹饪；垃圾请分类投放到厨房旁的专用垃圾桶内。<br>5. <b>外出断电:</b> 外出时请务必关闭空调、地暖及电磁炉电源。",
+        "t3_rules_title": "🌿 住宿公约 (House Rules)",
+        "t3_rules_body": "• <b>室内绝对禁烟:</b> 整栋建筑及房间内严禁吸烟（包括电子烟）。<br>• <b>室内更换拖鞋:</b> 请在玄关脱鞋并换穿室内拖鞋。<br>• <b>保持安静 (22:00–07:00):</b> 在走廊和楼梯也请轻声走动，晚上10点以后请勿使用洗衣机。<br>• <b>访客与烹饪限制:</b> 严禁非预订人员进入或留宿，请避免油烟或气味较大的烹饪。",
+        "t3_trash_exp": "♻️ 垃圾分类与长住丢弃指南（点击查看照片）",
+        "t3_trash_body": """
+        韩国垃圾分类非常严格，若将厨余垃圾与一般垃圾混装将面临罚款。<br><br>
+        <b>1. 室内垃圾分类方法</b><br>
+        • <b>厨余垃圾:</b> 请倒入水槽上方的<b>绿色专用厨余桶</b>内。<br>
+        • <b>可回收垃圾（纸张·塑料袋·易拉罐·玻璃瓶·塑料瓶）:</b> 清空并冲洗干净后，放入冰箱旁的<b>四层分类垃圾桶</b>中。<br>
+        • <b>一般垃圾:</b> 其他不可回收垃圾（含卫生间纸巾）请放入 <b>Trash 垃圾桶</b>。<br><br>
+        <b>2. 长住客人（5晚及以上）或垃圾桶装满时</b><br>
+        • 备用垃圾袋放在<b>水槽下方柜内</b>。（丢弃日：<b>周二 · 周四 · 周日</b>）<br>
+        • 系紧袋口——<b>厨余:</b> 黄色/绿色专用袋(2L/3L)，<b>可回收:</b> 透明塑料袋直接丢弃，<b>一般垃圾:</b> 白色计量垃圾袋(20L/50L)——放至<b>大楼前电线杆下</b>（右图蓝色圆圈位置）。
+        """,
+        "t3_trash_cap1": "室内四层分类垃圾桶（冰箱旁）",
+        "t3_trash_cap2": "室外垃圾投放点（周二·周四·周日）",
+        "t3_checkout_title": "✅ 退房前 10 秒检查清单",
+        "t3_checkout_body": "1. 清洗并整理用过的餐具 &nbsp; 2. 完成垃圾分类<br>3. 关闭空调、地暖及灯光 &nbsp; 4. 确认关好窗户与大门 &nbsp; 5. 检查随身物品是否遗漏",
         "t3_contact_title": "🐶 房东紧急联系方式",
         "t3_contact_body": "入住期间如需任何帮助，请随时联系我们。<br>• <b>预订平台消息:</b> Airbnb / 携程(Trip.com) / Booking.com 应用内聊天（最快）<br>• <b>即时通讯账号:</b> 微信(WeChat): <code>mongle-stay</code> / LINE: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
         # TAB 4
@@ -451,7 +507,7 @@ with tab_way:
     </div>
     """, unsafe_allow_html=True)
 
-# TAB 3: 체크인 · 도어락 · Wi-Fi · 하우스 룰
+# TAB 3: 체크인 · 도어락 · Wi-Fi · 규칙 · 분리수거 · 체크아웃
 with tab_checkin:
     st.markdown(f"""
     <div class="info-card">
@@ -483,6 +539,23 @@ with tab_checkin:
         <span class="badge">HOUSE RULES</span>
         <div class="card-title">{t['t3_rules_title']}</div>
         <p class="card-text">{t['t3_rules_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    with st.expander(t['t3_trash_exp'], expanded=False):
+        st.markdown(f"<div class='card-text'>{t['t3_trash_body']}</div>", unsafe_allow_html=True)
+        st.write("")
+        t_col1, t_col2 = st.columns(2)
+        with t_col1:
+            st.image("trash_bin.jpg", caption=t['t3_trash_cap1'], use_container_width=True)
+        with t_col2:
+            st.image("trash_outside.jpg", caption=t['t3_trash_cap2'], use_container_width=True)
+
+    st.markdown(f"""
+    <div class="info-card" style="margin-top: 16px;">
+        <span class="badge">CHECK-OUT</span>
+        <div class="card-title">{t['t3_checkout_title']}</div>
+        <p class="card-text">{t['t3_checkout_body']}</p>
     </div>
     """, unsafe_allow_html=True)
 
