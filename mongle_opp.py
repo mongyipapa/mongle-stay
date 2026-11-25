@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # 1. 페이지 기본 설정 (모바일 및 데스크탑 반응형)
 st.set_page_config(
@@ -8,12 +9,15 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# 현재 선택된 탭 인덱스 초기화 (0: 스토리, 1: 오시는 길, 2: 체크인, 3: 로컬)
+# 현재 선택된 탭 인덱스 및 스크롤 상태 초기화
 if "active_tab" not in st.session_state:
     st.session_state.active_tab = 0
+if "scroll_to_top" not in st.session_state:
+    st.session_state.scroll_to_top = False
 
 def go_to_tab(idx):
     st.session_state.active_tab = idx
+    st.session_state.scroll_to_top = True
 
 # 2. 커스텀 CSS (크림 아이보리 & 세이지 그린 감성 디자인)
 st.markdown("""
@@ -643,3 +647,17 @@ st.markdown("""
     Have a cozy and wonderful stay in Seoul 🐾
 </div>
 """, unsafe_allow_html=True)
+
+# 8. 페이지 전환 시 화면 맨 위로 자동 스크롤
+if st.session_state.scroll_to_top:
+    components.html(
+        """
+        <script>
+            window.parent.scrollTo({top: 0, behavior: 'smooth'});
+            const main = window.parent.document.querySelector('section.main');
+            if (main) { main.scrollTo({top: 0, behavior: 'smooth'}); }
+        </script>
+        """,
+        height=0
+    )
+    st.session_state.scroll_to_top = False
