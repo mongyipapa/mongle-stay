@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 # 1. 페이지 기본 설정 (모바일 및 데스크탑 반응형)
 st.set_page_config(
@@ -8,6 +7,13 @@ st.set_page_config(
     layout="centered",
     initial_sidebar_state="collapsed"
 )
+
+# 현재 선택된 탭 인덱스 초기화 (0: 스토리, 1: 오시는 길, 2: 체크인, 3: 로컬)
+if "active_tab" not in st.session_state:
+    st.session_state.active_tab = 0
+
+def go_to_tab(idx):
+    st.session_state.active_tab = idx
 
 # 2. 커스텀 CSS (크림 아이보리 & 세이지 그린 감성 디자인)
 st.markdown("""
@@ -110,23 +116,23 @@ st.markdown("""
     .map-btn-sub:hover {
         background-color: #B8896E;
     }
-    .stTabs [data-baseweb="tab-list"] {
-        gap: 6px;
-        background-color: #EFECE6;
-        padding: 6px;
-        border-radius: 14px;
-    }
-    .stTabs [data-baseweb="tab"] {
-        border-radius: 10px;
-        padding: 8px 10px;
-        font-size: 13px;
+    /* 네비게이션 버튼 및 하단 다음 페이지 버튼 스타일 */
+    div.stButton > button {
+        border-radius: 12px;
         font-weight: 600;
-        color: #5F6368;
+        font-size: 13.5px;
+        padding: 10px 8px;
+        border: 1px solid #DCD6CA;
+        transition: all 0.15s;
     }
-    .stTabs [aria-selected="true"] {
-        background-color: #FFFFFF !important;
-        color: #2E5A44 !important;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    div.stButton > button[kind="primary"] {
+        background-color: #2E5A44;
+        color: #FFFFFF;
+        border-color: #2E5A44;
+    }
+    div.stButton > button[kind="primary"]:hover {
+        background-color: #1E3F2F;
+        border-color: #1E3F2F;
     }
     div[role="radiogroup"] {
         justify-content: center;
@@ -141,6 +147,10 @@ CONTENT = {
         "title": "mongle-stay (몽글스테이)",
         "subtitle": "6호선 안암역 도보 5분 · 따뜻한 쉼과 서울의 로컬 감성이 머무는 공간",
         "tabs": ["🏡 스토리", "🗺️ 오시는 길", "🔑 체크인·Wi-Fi", "✨ 로컬·교통"],
+        "next_to_way": "👉 다음 안내: 숙소 오시는 길 보기",
+        "next_to_checkin": "👉 다음 안내: 체크인 · 도어락 · Wi-Fi 보기",
+        "next_to_local": "👉 다음 안내: 로컬 맛집 & 교통 꿀팁 보기",
+        "back_to_story": "🏡 처음으로 (몽글스테이 스토리)",
         # TAB 1: 스토리 & 공간 안내
         "t1_story_title": "🎨 Mongle Stay Story (Curated by miel Yi)",
         "t1_story_body": """
@@ -216,6 +226,10 @@ CONTENT = {
         "title": "mongle-stay Seoul",
         "subtitle": "5-min walk from Anam Stn (Line 6) · Cozy Local Stay in Seoul",
         "tabs": ["🏡 Story", "🗺️ Directions", "🔑 Check-in·Wi-Fi", "✨ Local·Transit"],
+        "next_to_way": "👉 Next: How to Get Here (Directions)",
+        "next_to_checkin": "👉 Next: Check-in · Door Lock · Wi-Fi",
+        "next_to_local": "👉 Next: Local Gems & Transit Tips",
+        "back_to_story": "🏡 Back to Start (Mongle Stay Story)",
         # TAB 1
         "t1_story_title": "🎨 Mongle Stay Story (Curated by miel Yi)",
         "t1_story_body": """
@@ -291,6 +305,10 @@ CONTENT = {
         "title": "mongle-stay (モングルステイ)",
         "subtitle": "地下鉄6号線「安岩(アナム)駅」徒歩5分 · ソウルのローカル感性あふれる空間",
         "tabs": ["🏡 ストーリー", "🗺️ アクセス", "🔑 チェックイン", "✨ 周辺·交通"],
+        "next_to_way": "👉 次へ：宿へのアクセス方法を見る",
+        "next_to_checkin": "👉 次へ：チェックイン・ドアロック・Wi-Fi",
+        "next_to_local": "👉 次へ：周辺スポット＆交通ガイド",
+        "back_to_story": "🏡 最初に戻る（モングルステイ物語）",
         # TAB 1
         "t1_story_title": "🎨 Mongle Stay Story (Curated by miel Yi)",
         "t1_story_body": """
@@ -366,6 +384,10 @@ CONTENT = {
         "title": "mongle-stay 首尔民宿",
         "subtitle": "地铁6号线安岩站步行5分钟 · 感受首尔本地烟火气的温馨居所",
         "tabs": ["🏡 民宿故事", "🗺️ 交通路线", "🔑 入住·Wi-Fi", "✨ 周边·出行"],
+        "next_to_way": "👉 下一步：查看交通路线（如何到达）",
+        "next_to_checkin": "👉 下一步：查看入住密码与 Wi-Fi",
+        "next_to_local": "👉 下一步：查看周边打卡与出行贴士",
+        "back_to_story": "🏡 返回首页（民宿故事与户型）",
         # TAB 1
         "t1_story_title": "🎨 Mongle Stay Story (Curated by miel Yi)",
         "t1_story_body": """
@@ -457,11 +479,24 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# 6. 게스트 여정 맞춤형 4대 탭 구성 (1.스토리 ➔ 2.오시는 길 ➔ 3.체크인·Wi-Fi ➔ 4.로컬·교통)
-tab_story, tab_way, tab_checkin, tab_local = st.tabs(t["tabs"])
+# 6. 상단 4대 카테고리 네비게이션 버튼 바
+nav_cols = st.columns(4)
+for idx, label in enumerate(t["tabs"]):
+    with nav_cols[idx]:
+        btn_type = "primary" if st.session_state.active_tab == idx else "secondary"
+        st.button(
+            label,
+            key=f"nav_{idx}",
+            type=btn_type,
+            use_container_width=True,
+            on_click=go_to_tab,
+            args=(idx,)
+        )
 
-# TAB 1: 몽글스테이 스토리 & 공간/객실 안내
-with tab_story:
+st.write("")
+
+# TAB 1 (index 0): 몽글스테이 스토리 & 공간/객실 안내
+if st.session_state.active_tab == 0:
     st.markdown(f"""
     <div class="info-card">
         <span class="badge">MONGLE STAY STORY</span>
@@ -479,9 +514,11 @@ with tab_story:
     """, unsafe_allow_html=True)
 
     st.image("floorplan.png", caption=t['t1_floorplan_caption'], use_container_width=True)
+    st.write("")
+    st.button(t["next_to_way"], type="primary", use_container_width=True, on_click=go_to_tab, args=(1,))
 
-# TAB 2: 숙소에 찾아오는 방법
-with tab_way:
+# TAB 2 (index 1): 숙소에 찾아오는 방법
+elif st.session_state.active_tab == 1:
     st.markdown(f"""
     <div class="info-card">
         <span class="badge">LOCATION</span>
@@ -508,8 +545,10 @@ with tab_way:
     </div>
     """, unsafe_allow_html=True)
 
-# TAB 3: 체크인 · 도어락 · Wi-Fi · 규칙 · 분리수거 · 체크아웃
-with tab_checkin:
+    st.button(t["next_to_checkin"], type="primary", use_container_width=True, on_click=go_to_tab, args=(2,))
+
+# TAB 3 (index 2): 체크인 · 도어락 · Wi-Fi · 규칙 · 분리수거 · 체크아웃
+elif st.session_state.active_tab == 2:
     st.markdown(f"""
     <div class="info-card">
         <span class="badge">CHECK-IN & DOOR LOCK</span>
@@ -567,8 +606,10 @@ with tab_checkin:
     </div>
     """, unsafe_allow_html=True)
 
-# TAB 4: 로컬 명소 & 교통 꿀팁
-with tab_local:
+    st.button(t["next_to_local"], type="primary", use_container_width=True, on_click=go_to_tab, args=(3,))
+
+# TAB 4 (index 3): 로컬 명소 & 교통 꿀팁
+elif st.session_state.active_tab == 3:
     st.markdown(f"""
     <div class="info-card">
         <span class="badge">WALKING 5~15 MIN</span>
@@ -593,6 +634,8 @@ with tab_local:
     </div>
     """, unsafe_allow_html=True)
 
+    st.button(t["back_to_story"], type="secondary", use_container_width=True, on_click=go_to_tab, args=(0,))
+
 # 7. 하단 푸터
 st.markdown("""
 <div style="text-align: center; padding: 24px 0 10px 0; color: #8C857B; font-size: 12.5px;">
@@ -600,41 +643,3 @@ st.markdown("""
     Have a cozy and wonderful stay in Seoul 🐾
 </div>
 """, unsafe_allow_html=True)
-
-# 8. 모바일 좌우 스와이프(터치 슬라이드) 탭 전환 스크립트
-components.html("""
-<script>
-const doc = window.parent.document;
-let startX = 0;
-let startY = 0;
-
-doc.addEventListener('touchstart', function(e) {
-    startX = e.changedTouches[0].screenX;
-    startY = e.changedTouches[0].screenY;
-}, {passive: true});
-
-doc.addEventListener('touchend', function(e) {
-    const endX = e.changedTouches[0].screenX;
-    const endY = e.changedTouches[0].screenY;
-    const diffX = endX - startX;
-    const diffY = endY - startY;
-
-    // 수평 스와이프 거리가 60px 이상이고, 위아래 스크롤보다 가로 이동이 클 때만 동작
-    if (Math.abs(diffX) > 60 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
-        const tabs = Array.from(doc.querySelectorAll('button[data-baseweb="tab"]'));
-        const activeIndex = tabs.findIndex(tab => tab.getAttribute('aria-selected') === 'true');
-        if (activeIndex === -1) return;
-
-        if (diffX < 0 && activeIndex < tabs.length - 1) {
-            // 왼쪽으로 밀기 -> 다음 탭
-            tabs[activeIndex + 1].click();
-            window.parent.scrollTo({top: 0, behavior: 'smooth'});
-        } else if (diffX > 0 && activeIndex > 0) {
-            // 오른쪽으로 밀기 -> 이전 탭
-            tabs[activeIndex - 1].click();
-            window.parent.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    }
-}, {passive: true});
-</script>
-""", height=0)
