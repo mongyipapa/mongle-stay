@@ -9,8 +9,8 @@ WIFI_5G = "U+Net1825_5G"
 WIFI_24G = "U+Net1825"
 WIFI_PW = "42155551M#"
 
-STOP_CITY_URL = "https://map.naver.com/p/search/우신향병원 08157"
-STOP_KU_URL = "https://map.naver.com/p/search/우신향병원 06176"
+STOP_CITY_URL = "https://naver.me/G6fKWAxD"  # 우신향병원 (08157 · 안암오거리/시내 방면)
+STOP_KU_URL = "https://naver.me/5K6ls48e"    # 우신향병원 (06176 · 고려대학교/복귀 방면)
 
 # 1. 페이지 기본 설정 (모바일 및 데스크탑 반응형)
 st.set_page_config(
