@@ -996,7 +996,7 @@ elif st.session_state.active_tab == 1:
         <p class="card-text">{t['t3_wifi_body']}</p>
     </div>
     """, unsafe_allow_html=True)
-    
+
     col1, col2 = st.columns(2)
     with col1:
         st.caption(t['t3_wifi_ssid'])
