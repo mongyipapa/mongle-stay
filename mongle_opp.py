@@ -3,11 +3,14 @@ import streamlit.components.v1 as components
 import time
 
 # =========================================================
-# [설정 영역] 숙소 Wi-Fi 및 연락처 정보
+# [설정 영역] 숙소 Wi-Fi 및 집 앞 정류장 지도 링크
 # =========================================================
 WIFI_5G = "U+Net1825_5G"
 WIFI_24G = "U+Net1825"
 WIFI_PW = "42155551M#"
+
+STOP_CITY_URL = "https://map.naver.com/p/search/우신향병원 08157"
+STOP_KU_URL = "https://map.naver.com/p/search/우신향병원 06176"
 
 # 1. 페이지 기본 설정 (모바일 및 데스크탑 반응형)
 st.set_page_config(
@@ -32,12 +35,12 @@ def go_to_tab(idx):
     st.session_state.active_tab = idx
     st.session_state.scroll_to_top = True
 
-# 2. 커스텀 CSS (아이폰 4열 가로 1줄 완벽 정렬 · 잘림 방지)
+# 2. 커스텀 CSS (다크모드 시인성 완벽 해결 · 4열 가로 1줄 균등 분할)
 st.markdown("""
 <style>
     .stApp {
-        background-color: #FAF9F6;
-        color: #3C4043;
+        background-color: #FAF9F6 !important;
+        color: #3C4043 !important;
         overflow-x: hidden;
     }
     .block-container {
@@ -56,7 +59,7 @@ st.markdown("""
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        gap: 4px !important;
+        gap: 5px !important;
         width: 100% !important;
     }
     div[data-testid="stHorizontalBlock"] > div[data-testid="column"],
@@ -73,7 +76,85 @@ st.markdown("""
         max-width: 100% !important;
         padding-left: 2px !important;
         padding-right: 2px !important;
-        font-size: 11.5px !important;
+    }
+
+    /* 버튼 공통 스타일 & 다크모드 시인성 강제 보정 */
+    div.stButton > button {
+        border-radius: 10px !important;
+        padding: 8px 4px !important;
+        transition: all 0.15s ease;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+    div.stButton > button p {
+        font-size: 12px !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
+    }
+
+    /* 미선택 버튼(secondary): 다크모드에서도 무조건 흰 배경 + 선명한 진한 글씨 */
+    div.stButton > button[kind="secondary"],
+    div.stButton > button[data-testid="baseButton-secondary"],
+    div.stButton > button[data-testid="stBaseButton-secondary"] {
+        background-color: #FFFFFF !important;
+        color: #2C2A29 !important;
+        border: 1.5px solid #C8BFB3 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    }
+    div.stButton > button[kind="secondary"] p,
+    div.stButton > button[data-testid="baseButton-secondary"] p,
+    div.stButton > button[data-testid="stBaseButton-secondary"] p {
+        color: #2C2A29 !important;
+        font-weight: 600 !important;
+    }
+    div.stButton > button[kind="secondary"]:hover,
+    div.stButton > button[data-testid="baseButton-secondary"]:hover,
+    div.stButton > button[data-testid="stBaseButton-secondary"]:hover {
+        background-color: #F2EFE9 !important;
+        border-color: #2E5A44 !important;
+    }
+
+    /* 선택된 버튼(primary): 세이지 그린 배경 + 흰 글씨 */
+    div.stButton > button[kind="primary"],
+    div.stButton > button[data-testid="baseButton-primary"],
+    div.stButton > button[data-testid="stBaseButton-primary"] {
+        background-color: #2E5A44 !important;
+        color: #FFFFFF !important;
+        border: 1.5px solid #2E5A44 !important;
+    }
+    div.stButton > button[kind="primary"] p,
+    div.stButton > button[data-testid="baseButton-primary"] p,
+    div.stButton > button[data-testid="stBaseButton-primary"] p {
+        color: #FFFFFF !important;
+        font-weight: 700 !important;
+    }
+    div.stButton > button[kind="primary"]:hover,
+    div.stButton > button[data-testid="baseButton-primary"]:hover,
+    div.stButton > button[data-testid="stBaseButton-primary"]:hover {
+        background-color: #1E3F2F !important;
+        border-color: #1E3F2F !important;
+    }
+
+    /* Expander(아코디언) & 캡션 다크모드 시인성 보정 */
+    div[data-testid="stExpander"] {
+        background-color: #FFFFFF !important;
+        border: 1px solid #E8E4DC !important;
+        border-radius: 12px !important;
+        margin-bottom: 8px !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+    }
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary p {
+        color: #2C2A29 !important;
+        font-weight: 600 !important;
+    }
+    div[data-testid="stExpander"] summary svg {
+        fill: #2E5A44 !important;
+        color: #2E5A44 !important;
+    }
+    div[data-testid="stCaptionContainer"] p {
+        color: #5C554E !important;
     }
 
     /* 상단 헤더 (한 줄 고정 + 잘림 방지) */
@@ -187,6 +268,37 @@ st.markdown("""
         font-size: 14px;
         color: #2E5A44;
     }
+    .stop-tip-box {
+        background-color: #F4F7F5;
+        border-left: 3px solid #4A7C62;
+        padding: 10px 12px;
+        border-radius: 8px;
+        margin-top: 10px;
+        font-size: 12.5px;
+        color: #2E5A44;
+        line-height: 1.55;
+    }
+    .stop-btn-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 10px;
+    }
+    .stop-btn {
+        display: block;
+        text-align: center;
+        background-color: #2E5A44;
+        color: #FFFFFF !important;
+        text-decoration: none;
+        padding: 10px 6px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+    .stop-btn-alt {
+        background-color: #4A7C62;
+    }
     .badge {
         display: inline-block;
         background-color: #F2EFE9;
@@ -220,42 +332,6 @@ st.markdown("""
     .map-btn-sub:hover {
         background-color: #B8896E;
     }
-
-    /* 버튼 공통 스타일 */
-    div.stButton > button {
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 12.5px;
-        padding: 8px 4px;
-        border: 1px solid #DCD6CA;
-        transition: all 0.15s;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    div.stButton > button p {
-        font-size: 11.5px !important;
-        margin: 0 !important;
-        white-space: nowrap !important;
-    }
-    div.stButton > button[kind="primary"] {
-        background-color: #2E5A44;
-        color: #FFFFFF;
-        border-color: #2E5A44;
-    }
-    div.stButton > button[kind="primary"]:hover {
-        background-color: #1E3F2F;
-        border-color: #1E3F2F;
-    }
-
-    /* Expander(아코디언) 스타일 */
-    div[data-testid="stExpander"] {
-        background-color: #FFFFFF;
-        border: 1px solid #E8E4DC;
-        border-radius: 12px;
-        margin-bottom: 8px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -279,7 +355,7 @@ CONTENT = {
             "<b>도로명 주소:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br>"
             "<b>영문 주소:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br>"
             "<b>가까운 역:</b> 지하철 6호선 <b>안암역(Anam Station) 3번 출구</b> 도보 5분<br>"
-            "<b>가까운 버스정류장:</b> <b>안암오거리 · 고려대역(고대앞삼거리)</b> 도보 1~3분"
+            "<b>집 앞 버스정류장:</b> <b>우신향병원</b> (안암오거리방면 <code>08157</code> · 고려대방면 <code>06176</code>)"
         ),
         "t2_btn_naver": "🟢 네이버 지도로 길찾기 (한국 내 가장 정확)",
         "t2_btn_google": "🗺️ Google Maps로 열기",
@@ -368,7 +444,7 @@ CONTENT = {
             "&nbsp;&nbsp;- <b>5인 이상:</b> 침실 3개 전체 개방 (Palette / Amber / Cozy Room)</span>"
         ),
         "t1_floorplan_caption": "📐 몽글스테이 3D 공간 구조 및 객실 배치도",
-        # TAB 4: 로컬 명소 & 권역별 버스·지하철(아코디언) & 교통카드
+        # TAB 4: 로컬 명소 & 집 앞 정류장 위치 & 권역별 버스(아코디언) & 교통카드
         "t4_walk_title": "☕ 도보권 로컬 산책 & 시장 투어 (안암 · 제기)",
         "t4_walk_body": (
             "<b>1. 고려대학교 캠퍼스 & 안암동 대학가 맛집 (도보 5~10분)</b><br>"
@@ -378,14 +454,24 @@ CONTENT = {
             "<b>3. 성북천 산책로 (도보 8분)</b><br>"
             "• 저녁 식사 후 조명이 예쁘게 켜진 성북천 물길을 따라 여유롭게 산책해 보세요."
         ),
-        "t4_city_title": "🚌 서울 5대 권역별 추천 교통 (집 앞 버스 · 지하철)",
-        "t4_city_intro": "숙소 도보 1~3분 거리의 <b>안암오거리 · 고려대역(고대앞삼거리)</b> 정류장에서 환승 없이 이동할 수 있습니다. 권역을 눌러 확인하세요:",
+        "t4_city_title": "🚌 집 앞 정류장 (우신향병원) & 권역별 교통",
+        "t4_city_intro": (
+            "몽글스테이 바로 앞에 <b>우신향병원 버스정류장</b>이 있습니다. "
+            "출발·복귀 방향을 확인한 뒤 아래 권역을 눌러 직통 노선을 확인하세요."
+        ),
+        "t4_stop_btn1": "📍 우신향병원 (08157)<br>안암오거리·시내 방면",
+        "t4_stop_btn2": "📍 우신향병원 (06176)<br>고려대학교·복귀 하차",
+        "t4_stop_tip": (
+            "💡 <b>정류장 번호로 방향 구분하기:</b><br>"
+            "• <b>시내 나갈 때 (승차):</b> <code>08157</code> 우신향병원 (안암오거리 방면)<br>"
+            "• <b>숙소 돌아올 때 (하차):</b> <code>06176</code> 우신향병원 (고려대학교 방면)"
+        ),
         "t4_areas": [
-            ("🏯 1. 동대문 · 종로 · 고궁권 (약 10~20분)", "<b>주요 스팟:</b> DDP, 광장시장, 익선동, 경복궁<br>• <b>버스 (직통):</b> <code>101</code> · <code>144</code> · <code>273</code> · <code>111</code>번 (안암오거리 정류장)<br>• <b>지하철:</b> 6호선 안암역 ➔ 동묘앞역(1호선 환승)"),
-            ("🍷 2. 한남동 · 이태원 · 용산권 (약 20~30분)", "<b>주요 스팟:</b> 한남 카페거리, 이태원, 해방촌<br>• <b>버스 (직통):</b> <b><code>110A</code>번</b> (고려대역·고대앞삼거리 탑승) ➔ 한강진역·이태원역·녹사평역 직통<br>&nbsp;&nbsp;<span style='font-size:13px; color:#8C5A3C;'>(※ 숙소 복귀 시 반대방향 <b><code>110B</code>번</b> 탑승!)</span><br>• <b>지하철 (직통):</b> 6호선 안암역 ➔ 한강진역·이태원역 환승 없이 직통"),
-            ("🎨 3. 성수 · 서울숲권 (약 15~20분)", "<b>주요 스팟:</b> 성수동 팝업·카페거리, 서울숲<br>• <b>버스 (직통):</b> <code>121</code>번 (고려대역·고대앞삼거리 탑승) ➔ 서울숲·성수 방면<br>• <b>지하철:</b> 6호선 안암역 ➔ 신당역(2호선 환승) ➔ 성수역"),
-            ("🎸 4. 홍대 · 연남동 · 망원권 (약 30~35분)", "<b>주요 스팟:</b> 홍대, 연트럴파크, 망원시장<br>• <b>지하철 (추천·직통):</b> 6호선 안암역 ➔ 망원역·합정역 환승 없이 직통<br>• <b>버스 (직통):</b> <code>110A</code>번 ➔ 신촌·동교동삼거리(연남동)까지 한 번에 연결"),
-            ("🏙️ 5. 명동 · 남산 · 강남권 (약 25~40분)", "<b>주요 스팟:</b> 명동, N서울타워, 가로수길, 강남역<br>• <b>명동·남산:</b> 6호선 안암역 ➔ 약수역(3호선 환승) ➔ 충무로역<br>• <b>강남·신사:</b> <code>144</code>번 버스 (신사역·강남역 직통)")
+            ("🏯 1. 동대문 · 종로 · 광화문 · 서울역 (약 10~25분)", "<b>주요 스팟:</b> DDP, 광장시장, 익선동, 경복궁, 남대문시장, 서울역<br>• <b>집 앞 <code>08157</code> 직통 버스:</b> <code>101</code>(종로·광화문) · <code>144</code>(DDP) · <code>173</code>(청계천·남대문·서울역) · <code>111</code>번<br>• <b>지하철:</b> 6호선 안암역 ➔ 동묘앞역(1호선 환승)"),
+            ("🍷 2. 한남동 · 이태원 · 용산권 (약 20~30분)", "<b>주요 스팟:</b> 한남 카페거리, 이태원, 해방촌<br>• <b>집 앞 <code>08157</code> 버스:</b> <code>144</code>번 (한남동·신사 방면 직통)<br>• <b>인근 고려대역·고대삼거리 버스:</b> <b><code>110A</code>번</b> ➔ 한강진·이태원·녹사평 직통 <span style='font-size:13px; color:#8C5A3C;'>(※ 복귀 시 <b><code>110B</code>번</b>!)</span><br>• <b>지하철 (직통):</b> 6호선 안암역 ➔ 한강진역·이태원역 환승 없이 직통"),
+            ("🎨 3. 성수 · 서울숲권 (약 15~20분)", "<b>주요 스팟:</b> 성수동 팝업·카페거리, 서울숲<br>• <b>인근 고려대역·고대삼거리 버스:</b> <code>121</code>번 ➔ 서울숲·성수 방면<br>• <b>지하철:</b> 6호선 안암역 ➔ 신당역(2호선 환승) ➔ 성수역"),
+            ("🎸 4. 홍대 · 연남동 · 망원권 (약 30~35분)", "<b>주요 스팟:</b> 홍대, 연트럴파크, 망원시장<br>• <b>지하철 (추천·직통):</b> 6호선 안암역 ➔ 망원역·합정역 환승 없이 직통<br>• <b>인근 고려대역·고대삼거리 버스:</b> <code>110A</code>번 ➔ 신촌·동교동삼거리(연남동) 직통"),
+            ("🏙️ 5. 명동 · 남산 · 강남권 (약 25~40분)", "<b>주요 스팟:</b> 명동, N서울타워, 가로수길, 강남역<br>• <b>강남·신사 (집 앞 <code>08157</code> 직통):</b> <code>144</code>번 버스 (신사역·강남역·교대역 직통)<br>• <b>명동·남대문:</b> <code>173</code>번 버스 (<code>08157</code>) 또는 6호선 안암역 ➔ 약수역(3호선) ➔ 충무로역")
         ],
         "t4_trans_title": "💳 교통카드 3종 선택법 (공항 구매 팁 포함)",
         "t4_trans_body": (
@@ -417,7 +503,7 @@ CONTENT = {
             "<b>English Address:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br>"
             "<b>Korean Address:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br>"
             "<b>Nearest Subway:</b> <b>Anam Station (Line 6), Exit 3</b> (5-minute walk)<br>"
-            "<b>Nearest Bus Stops:</b> <b>Anam Ogeori / Korea Univ. Stn</b> (1–3 min walk)"
+            "<b>Bus Stop Right Outside:</b> <b>Woosinhyang Hospital</b> (City-bound <code>08157</code> · Korea Univ.-bound <code>06176</code>)"
         ),
         "t2_btn_naver": "🟢 Open in Naver Map (Most Accurate in Korea)",
         "t2_btn_google": "🗺️ Open in Google Maps",
@@ -513,14 +599,24 @@ CONTENT = {
             "<b>3. Seongbukcheon Stream Trail (8-min walk)</b><br>"
             "• Enjoy a peaceful evening walk along the illuminated waterside path."
         ),
-        "t4_city_title": "🚌 Seoul Transit by Area (Direct Buses & Subway)",
-        "t4_city_intro": "Bus stops (<b>Anam Ogeori / Korea Univ. Stn</b>) are <b>1–3 mins away on foot</b>. Tap each area to see direct routes:",
+        "t4_city_title": "🚌 Nearest Bus Stop (Woosinhyang Hosp.) & Routes",
+        "t4_city_intro": (
+            "<b>Woosinhyang Hospital Stop (우신향병원)</b> is right in front of mongle-stay! "
+            "Check your stop ID below, then tap each area to view routes:"
+        ),
+        "t4_stop_btn1": "📍 Stop 08157<br>To City Center",
+        "t4_stop_btn2": "📍 Stop 06176<br>Return Drop-off",
+        "t4_stop_tip": (
+            "💡 <b>Check the 5-Digit Stop ID:</b><br>"
+            "• <b>Going to City Center (Board):</b> <code>08157</code> Woosinhyang Hosp. (Toward Anam Ogeori)<br>"
+            "• <b>Returning to Stay (Get off):</b> <code>06176</code> Woosinhyang Hosp. (Toward Korea Univ.)"
+        ),
         "t4_areas": [
-            ("🏯 1. Dongdaemun · Jongno · Palaces (~10–20 mins)", "<b>Spots:</b> DDP, Gwangjang Market, Ikseon-dong, Gyeongbokgung<br>• <b>Direct Bus:</b> <code>101</code> · <code>144</code> · <code>273</code> · <code>111</code> (at Anam Ogeori stop)<br>• <b>Subway:</b> Line 6 Anam Stn ➔ Transfer at Dongmyo Stn (Line 1)"),
-            ("🍷 2. Hannam-dong · Itaewon · Yongsan (~20–30 mins)", "<b>Spots:</b> Hannam Cafes, Itaewon, Haebangchon<br>• <b>Direct Bus:</b> <b><code>110A</code></b> (at Korea Univ. Stn stop) ➔ Direct to Hangangjin, Itaewon & Noksapyeong<br>&nbsp;&nbsp;<span style='font-size:13px; color:#8C5A3C;'>(※ Take <b><code>110B</code></b> when returning!)</span><br>• <b>Direct Subway:</b> Line 6 Anam Stn ➔ Hangangjin / Itaewon Stn (No transfer)"),
-            ("🎨 3. Seongsu · Seoul Forest (~15–20 mins)", "<b>Spots:</b> Seongsu Pop-ups & Cafes, Seoul Forest<br>• <b>Direct Bus:</b> <code>121</code> (at Korea Univ. Stn stop) ➔ Seoul Forest & Seongsu<br>• <b>Subway:</b> Line 6 Anam Stn ➔ Transfer at Sindang Stn (Line 2) ➔ Seongsu Stn"),
-            ("🎸 4. Hongdae · Yeonnam-dong · Mangwon (~30–35 mins)", "<b>Spots:</b> Hongdae, Yeontral Park, Mangwon Market<br>• <b>Direct Subway (Recommended):</b> Line 6 Anam Stn ➔ Mangwon / Hapjeong Stn (No transfer)<br>• <b>Direct Bus:</b> <code>110A</code> ➔ Direct to Sinchon & Yeonnam-dong"),
-            ("🏙️ 5. Myeongdong · Namsan · Gangnam (~25–40 mins)", "<b>Spots:</b> Myeongdong, N Seoul Tower, Garosu-gil, Gangnam<br>• <b>Myeongdong/Namsan:</b> Line 6 ➔ Transfer at Yaksu Stn (Line 3) ➔ Chungmuro Stn<br>• <b>Gangnam/Sinsa:</b> Direct Bus <code>144</code> to Sinsa & Gangnam Stn")
+            ("🏯 1. Dongdaemun · Jongno · Gwanghwamun · Seoul Stn (~10–25m)", "<b>Spots:</b> DDP, Gwangjang Market, Ikseon-dong, Gyeongbokgung, Namdaemun, Seoul Stn<br>• <b>Direct Bus from <code>08157</code>:</b> <code>101</code> (Jongno/Gwanghwamun) · <code>144</code> (DDP) · <code>173</code> (Cheonggyecheon/Namdaemun/Seoul Stn) · <code>111</code><br>• <b>Subway:</b> Line 6 Anam Stn ➔ Transfer at Dongmyo Stn (Line 1)"),
+            ("🍷 2. Hannam-dong · Itaewon · Yongsan (~20–30 mins)", "<b>Spots:</b> Hannam Cafes, Itaewon, Haebangchon<br>• <b>From <code>08157</code>:</b> Bus <code>144</code> (Direct to Hannam-dong & Sinsa)<br>• <b>From nearby Korea Univ. Stn Stop:</b> <b><code>110A</code></b> ➔ Direct to Hangangjin & Itaewon <span style='font-size:13px; color:#8C5A3C;'>(※ Take <b><code>110B</code></b> back!)</span><br>• <b>Direct Subway:</b> Line 6 Anam Stn ➔ Hangangjin / Itaewon Stn (No transfer)"),
+            ("🎨 3. Seongsu · Seoul Forest (~15–20 mins)", "<b>Spots:</b> Seongsu Pop-ups & Cafes, Seoul Forest<br>• <b>From nearby Korea Univ. Stn Stop:</b> Bus <code>121</code> ➔ Seoul Forest & Seongsu<br>• <b>Subway:</b> Line 6 Anam Stn ➔ Transfer at Sindang Stn (Line 2) ➔ Seongsu Stn"),
+            ("🎸 4. Hongdae · Yeonnam-dong · Mangwon (~30–35 mins)", "<b>Spots:</b> Hongdae, Yeontral Park, Mangwon Market<br>• <b>Direct Subway (Recommended):</b> Line 6 Anam Stn ➔ Mangwon / Hapjeong Stn (No transfer)<br>• <b>From nearby Korea Univ. Stn Stop:</b> Bus <code>110A</code> ➔ Direct to Sinchon & Yeonnam-dong"),
+            ("🏙️ 5. Myeongdong · Namsan · Gangnam (~25–40 mins)", "<b>Spots:</b> Myeongdong, N Seoul Tower, Garosu-gil, Gangnam<br>• <b>Gangnam/Sinsa (Direct from <code>08157</code>):</b> Bus <code>144</code> straight to Sinsa & Gangnam Stn<br>• <b>Myeongdong/Namdaemun:</b> Bus <code>173</code> (<code>08157</code>) or Line 6 ➔ Yaksu Stn (Line 3) ➔ Chungmuro Stn")
         ],
         "t4_trans_title": "💳 Choosing Your Transit Card (Airport Tips)",
         "t4_trans_body": (
@@ -552,7 +648,7 @@ CONTENT = {
             "<b>韓国語住所:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br>"
             "<b>英語住所:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br>"
             "<b>最寄り駅:</b> 地下鉄6号線 <b>安岩(アナム)駅 3番出口</b> 徒歩5分<br>"
-            "<b>最寄りバス停:</b> <b>安岩五叉路(안암오거리) · 高麗大駅(고려대역)</b> 徒歩1〜3分"
+            "<b>目の前のバス停:</b> <b>ウシンヒャン病院(우신향병원)</b> (市内方面 <code>08157</code> · 高麗大方面 <code>06176</code>)"
         ),
         "t2_btn_naver": "🟢 NAVERマップでルート検索（韓国で最も正確）",
         "t2_btn_google": "🗺️ Google マップで開く",
@@ -648,14 +744,21 @@ CONTENT = {
             "<b>3. 城北川(ソンブクチョン)散策路（徒歩8分）</b><br>"
             "• 夕食後、ライトアップされた川辺の遊歩道をゆったりお散歩してみてください。"
         ),
-        "t4_city_title": "🚌 ソウル5大エリア別おすすめ交通（徒歩1〜3分バス停・地下鉄）",
-        "t4_city_intro": "宿から徒歩1〜3分の<b>安岩五叉路・高麗大駅</b>バス停から主要観光地へ直通できます。エリアをタップして確認：",
+        "t4_city_title": "🚌 目の前のバス停 (우신향병원) ＆エリア別交通",
+        "t4_city_intro": "宿のすぐ目の前に<b>ウシンヒャン病院(우신향병원)バス停</b>があります。番号を確認してエリアをタップ：",
+        "t4_stop_btn1": "📍 バス停 08157<br>安岩五叉路・市内方面",
+        "t4_stop_btn2": "📍 バス停 06176<br>高麗大方面・帰着下車",
+        "t4_stop_tip": (
+            "💡 <b>5桁の番号で方向をチェック:</b><br>"
+            "• <b>市内へ出かける時（乗車）:</b> <code>08157</code> 우신향병원（安岩五叉路方面）<br>"
+            "• <b>宿へ戻る時（下車）:</b> <code>06176</code> 우신향병원（高麗大学校方面）"
+        ),
         "t4_areas": [
-            ("🏯 1. 東大門・鍾路・古宮エリア（約10〜20分）", "<b>スポット:</b> DDP、広蔵市場、益善洞、景福宮<br>• <b>直通バス:</b> <code>101</code> · <code>144</code> · <code>273</code> · <code>111</code>番（安岩五叉路バス停）<br>• <b>地下鉄:</b> 6号線 安岩駅 ➔ 東廟前駅で1号線に乗換"),
-            ("🍷 2. 漢南洞・梨泰院・龍山エリア（約20〜30分）", "<b>スポット:</b> 漢南カフェ通り、梨泰院、解放村<br>• <b>直通バス:</b> <b><code>110A</code>番</b>（高麗大駅バス停）➔ 漢江鎮駅・梨泰院駅・緑莎坪駅へ直通<br>&nbsp;&nbsp;<span style='font-size:13px; color:#8C5A3C;'>(※ 帰りは反対方向の<b><code>110B</code>番</b>に乗車！)</span><br>• <b>直通地下鉄:</b> 6号線 安岩駅 ➔ 漢江鎮駅・梨泰院駅（乗換なし）"),
-            ("🎨 3. 聖水(ソンス)・ソウルの森エリア（約15〜20分）", "<b>スポット:</b> 聖水洞カフェ通り、ソウルの森<br>• <b>直通バス:</b> <code>121</code>番（高麗大駅バス停）➔ ソウルの森・聖水方面<br>• <b>地下鉄:</b> 6号線 安岩駅 ➔ 新堂駅(2号線乗換) ➔ 聖水駅"),
-            ("🎸 4. 弘大(ホンデ)・延南洞・望遠エリア（約30〜35分）", "<b>スポット:</b> 弘大、延南洞、望遠市場<br>• <b>直通地下鉄（おすすめ）:</b> 6号線 安岩駅 ➔ 望遠駅・合井駅（乗換なし）<br>• <b>直通バス:</b> <code>110A</code>番 ➔ 新村・延南洞まで一本で直通"),
-            ("🏙️ 5. 明洞・南山・江南エリア（約25〜40分）", "<b>スポット:</b> 明洞、Nソウルタワー、カロスキル、江南駅<br>• <b>明洞・南山:</b> 6号線 ➔ 薬水駅(3号線乗換) ➔ 忠武路駅<br>• <b>江南・新沙:</b> 直通バス <code>144</code>番（新沙駅・江南駅へ直通）")
+            ("🏯 1. 東大門・鍾路・光化門・ソウル駅（約10〜25分）", "<b>スポット:</b> DDP、広蔵市場、益善洞、景福宮、南大門市場、ソウル駅<br>• <b>目の前 <code>08157</code> 直通バス:</b> <code>101</code>(鍾路・光化門) · <code>144</code>(DDP) · <code>173</code>(清渓川・南大門・ソウル駅) · <code>111</code>番<br>• <b>地下鉄:</b> 6号線 安岩駅 ➔ 東廟前駅で1号線に乗換"),
+            ("🍷 2. 漢南洞・梨泰院・龍山エリア（約20〜30分）", "<b>スポット:</b> 漢南カフェ通り、梨泰院、解放村<br>• <b>目の前 <code>08157</code> バス:</b> <code>144</code>番（漢南洞・新沙方面へ直通）<br>• <b>近隣の高麗大駅バス停:</b> <b><code>110A</code>番</b> ➔ 漢江鎮・梨泰院へ直通 <span style='font-size:13px; color:#8C5A3C;'>(※ 帰りは<b><code>110B</code>番</b>！)</span><br>• <b>直通地下鉄:</b> 6号線 安岩駅 ➔ 漢江鎮駅・梨泰院駅（乗換なし）"),
+            ("🎨 3. 聖水(ソンス)・ソウルの森エリア（約15〜20分）", "<b>スポット:</b> 聖水洞カフェ通り、ソウルの森<br>• <b>近隣の高麗大駅バス停:</b> <code>121</code>番 ➔ ソウルの森・聖水方面<br>• <b>地下鉄:</b> 6号線 安岩駅 ➔ 新堂駅(2号線乗換) ➔ 聖水駅"),
+            ("🎸 4. 弘大(ホンデ)・延南洞・望遠エリア（約30〜35分）", "<b>スポット:</b> 弘大、延南洞、望遠市場<br>• <b>直通地下鉄（おすすめ）:</b> 6号線 安岩駅 ➔ 望遠駅・合井駅（乗換なし）<br>• <b>近隣の高麗大駅バス停:</b> <code>110A</code>番 ➔ 新村・延南洞まで一本で直通"),
+            ("🏙️ 5. 明洞・南山・江南エリア（約25〜40分）", "<b>スポット:</b> 明洞、Nソウルタワー、カロスキル、江南駅<br>• <b>江南・新沙（<code>08157</code> 直通）:</b> <code>144</code>番バス（新沙駅・江南駅へ直通）<br>• <b>明洞・南大門:</b> <code>173</code>番バス（<code>08157</code>）または 6号線 ➔ 薬水駅(3号線) ➔ 忠武路駅")
         ],
         "t4_trans_title": "💳 交通カード3種の選び方（空港購入ガイド）",
         "t4_trans_body": (
@@ -687,7 +790,7 @@ CONTENT = {
             "<b>韩文地址:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br>"
             "<b>英文地址:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br>"
             "<b>最近地铁站:</b> 地铁6号线 <b>安岩站 (Anam Station) 3号出口</b> 步行5分钟<br>"
-            "<b>最近公交站:</b> <b>安岩五岔路口 (안암오거리) · 高丽大站 (고려대역)</b> 步行1~3分钟"
+            "<b>门口公交站:</b> <b>宇信香医院(우신향병원)</b> (往市中心 <code>08157</code> · 往高丽大 <code>06176</code>)"
         ),
         "t2_btn_naver": "🟢 打开 Naver 地图导航（韩国境内最准确）",
         "t2_btn_google": "🗺️ 打开 Google 地图",
@@ -783,14 +886,21 @@ CONTENT = {
             "<b>3. 城北川散步路（步行 8 分钟）</b><br>"
             "• 晚饭后沿着灯光璀璨的溪边步道悠闲散步，感受首尔本地人的慢生活。"
         ),
-        "t4_city_title": "🚌 首尔五大核心商圈出行指南（门口直达公交 · 地铁）",
-        "t4_city_intro": "民宿步行 1~3 分钟即到 <b>安岩五岔路口 · 高丽大站</b> 公交站，无需换乘即可直达各大商圈。点击区域查看路线：",
+        "t4_city_title": "🚌 门口公交站 (우신향병원) & 商圈出行",
+        "t4_city_intro": "民宿正前方就是<b>宇信香医院(우신향병원)公交站</b>，请先确认站台编号，再点击下方商圈查看路线：",
+        "t4_stop_btn1": "📍 公交站 08157<br>往安岩五岔路口·市中心",
+        "t4_stop_btn2": "📍 公交站 06176<br>往高丽大·返程下车站",
+        "t4_stop_tip": (
+            "💡 <b>用5位站台编号区分方向:</b><br>"
+            "• <b>前往市中心（上车）:</b> <code>08157</code> 우신향병원（安岩五岔路口方向）<br>"
+            "• <b>返回民宿（下车）:</b> <code>06176</code> 우신향병원（高丽大学方向）"
+        ),
         "t4_areas": [
-            ("🏯 1. 东大门 · 钟路 · 古宫商圈（约 10–20 分钟）", "<b>热门景点:</b> DDP、广藏市场、益善洞、景福宫<br>• <b>直达公交:</b> <code>101</code> · <code>144</code> · <code>273</code> · <code>111</code> 路（安岩五岔路口站上车）<br>• <b>地铁:</b> 6号线安岩站 ➔ 东庙前站换乘1号线"),
-            ("🍷 2. 汉南洞 · 梨泰院 · 龙山商圈（约 20–30 分钟）", "<b>热门景点:</b> 汉南洞咖啡街、梨泰院、解放村<br>• <b>直达公交:</b> <b><code>110A</code> 路</b>（高丽大站上车）➔ 直达汉江镇站、梨泰院站、绿莎坪站<br>&nbsp;&nbsp;<span style='font-size:13px; color:#8C5A3C;'>(※ 返程请乘坐反方向的 <b><code>110B</code> 路</b>！)</span><br>• <b>直达地铁:</b> 6号线安岩站 ➔ 汉江镇站 / 梨泰院站（无需换乘）"),
-            ("🎨 3. 圣水洞 · 首尔林商圈（约 15–20 分钟）", "<b>热门景点:</b> 圣水洞快闪店与咖啡街、首尔林<br>• <b>直达公交:</b> <code>121</code> 路（高丽大站上车）➔ 直达首尔林·圣水方向<br>• <b>地铁:</b> 6号线安岩站 ➔ 新堂站换乘2号线 ➔ 圣水站"),
-            ("🎸 4. 弘大 · 延南洞 · 望远商圈（约 30–35 分钟）", "<b>热门景点:</b> 弘大、延南洞、望远市场<br>• <b>直达地铁（推荐）:</b> 6号线安岩站 ➔ 望远站 / 合井站（无需换乘）<br>• <b>直达公交:</b> <code>110A</code> 路 ➔ 一线直达新村与延南洞"),
-            ("🏙️ 5. 明洞 · 南山 · 江南商圈（约 25–40 分钟）", "<b>热门景点:</b> 明洞、N首尔塔、林荫道、江南站<br>• <b>明洞·南山:</b> 6号线 ➔ 药水站换乘3号线 ➔ 忠武路站<br>• <b>江南·新沙:</b> <code>144</code> 路公交直达新沙站与江南站")
+            ("🏯 1. 东大门 · 钟路 · 光化门 · 首尔站（约 10–25 分钟）", "<b>热门景点:</b> DDP、广藏市场、益善洞、景福宫、南大门市场、首尔站<br>• <b>门口 <code>08157</code> 直达公交:</b> <code>101</code>(钟路·光化门) · <code>144</code>(DDP) · <code>173</code>(清溪川·南大门·首尔站) · <code>111</code> 路<br>• <b>地铁:</b> 6号线安岩站 ➔ 东庙前站换乘1号线"),
+            ("🍷 2. 汉南洞 · 梨泰院 · 龙山商圈（约 20–30 分钟）", "<b>热门景点:</b> 汉南洞咖啡街、梨泰院、解放村<br>• <b>门口 <code>08157</code> 公交:</b> <code>144</code> 路（直达汉南洞·新沙）<br>• <b>附近高丽大站公交:</b> <b><code>110A</code> 路</b> ➔ 直达汉江镇·梨泰院 <span style='font-size:13px; color:#8C5A3C;'>(※ 返程请坐 <b><code>110B</code> 路</b>！)</span><br>• <b>直达地铁:</b> 6号线安岩站 ➔ 汉江镇站 / 梨泰院站（无需换乘）"),
+            ("🎨 3. 圣水洞 · 首尔林商圈（约 15–20 分钟）", "<b>热门景点:</b> 圣水洞快闪店与咖啡街、首尔林<br>• <b>附近高丽大站公交:</b> <code>121</code> 路 ➔ 直达首尔林·圣水方向<br>• <b>地铁:</b> 6号线安岩站 ➔ 新堂站换乘2号线 ➔ 圣水站"),
+            ("🎸 4. 弘大 · 延南洞 · 望远商圈（约 30–35 分钟）", "<b>热门景点:</b> 弘大、延南洞、望远市场<br>• <b>直达地铁（推荐）:</b> 6号线安岩站 ➔ 望远站 / 合井站（无需换乘）<br>• <b>附近高丽大站公交:</b> <code>110A</code> 路 ➔ 一线直达新村与延南洞"),
+            ("🏙️ 5. 明洞 · 南山 · 江南商圈（约 25–40 分钟）", "<b>热门景点:</b> 明洞、N首尔塔、林荫道、江南站<br>• <b>江南·新沙（门口 <code>08157</code> 直达）:</b> <code>144</code> 路公交直达新沙站与江南站<br>• <b>明洞·南大门:</b> <code>173</code> 路公交（<code>08157</code>）或 6号线 ➔ 药水站(3号线) ➔ 忠武路站")
         ],
         "t4_trans_title": "💳 三种交通卡怎么选？（含机场购买贴士）",
         "t4_trans_body": (
@@ -979,7 +1089,7 @@ elif st.session_state.active_tab == 2:
     st.write("")
     st.button(t["next_to_local"], type="primary", use_container_width=True, on_click=go_to_tab, args=(3,))
 
-# TAB 4 (index 3): 로컬 명소 & 권역별 교통(아코디언) & 교통카드
+# TAB 4 (index 3): 로컬 명소 & 정류장 위치 & 권역별 교통(아코디언) & 교통카드
 elif st.session_state.active_tab == 3:
     st.markdown(f"""
     <div class="info-card">
@@ -991,9 +1101,14 @@ elif st.session_state.active_tab == 3:
 
     st.markdown(f"""
     <div class="info-card" style="margin-bottom: 10px;">
-        <span class="badge">BUS & SUBWAY BY AREA</span>
+        <span class="badge">BUS STOPS & ROUTES</span>
         <div class="card-title">{t['t4_city_title']}</div>
         <p class="card-text">{t['t4_city_intro']}</p>
+        <div class="stop-btn-grid">
+            <a href="{STOP_CITY_URL}" target="_blank" class="stop-btn">{t['t4_stop_btn1']}</a>
+            <a href="{STOP_KU_URL}" target="_blank" class="stop-btn stop-btn-alt">{t['t4_stop_btn2']}</a>
+        </div>
+        <div class="stop-tip-box">{t['t4_stop_tip']}</div>
     </div>
     """, unsafe_allow_html=True)
 
