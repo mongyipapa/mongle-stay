@@ -59,6 +59,14 @@ st.markdown("""
         color: #4A4E52;
         margin: 0;
     }
+    .story-quote {
+        border-left: 3px solid #4A7C62;
+        padding-left: 12px;
+        margin: 10px 0;
+        color: #3C4043;
+        font-size: 14px;
+        line-height: 1.6;
+    }
     .badge {
         display: inline-block;
         background-color: #F2EFE9;
@@ -130,6 +138,21 @@ CONTENT = {
         "t1_wifi_body": "원하시는 Wi-Fi와 비밀번호 우측의 복사 아이콘을 눌러 연결하세요.",
         "t1_wifi_ssid": "네트워크 이름 (SSID)",
         "t1_wifi_pw": "비밀번호 (5G · 2.4G 공통)",
+        "t1_story_title": "🎨 Mongle Stay Story & 공간 안내 (Curated by miel Yi)",
+        "t1_story_body": """
+        몽글스테이는 서로 다른 나라와 도시에서 온 여행자들이 서울의 일상을 편안하게 경험할 수 있도록 만든 집입니다. 좋아하는 음악과 문화는 달라도, 여행지에서 느끼는 설렘과 새로운 이야기를 발견하는 기쁨은 서로 닮아 있습니다. 몽글스테이에 머무는 시간이 단순한 숙박을 넘어, 자신만의 서울 취향과 기억을 발견하는 시간이 되기를 바랍니다.
+        <div class='story-quote'>
+            <b>• 취향:</b> 각기 다른 색과 분위기를 가진 공간에서 나에게 가장 편안한 방식으로 머물러보세요.<br>
+            <b>• 연결:</b> K컬처와 안암의 일상, 서울의 오래된 시장과 새로운 문화를 함께 만나보세요.<br>
+            <b>• 안심:</b> 낯선 도시에서도 내 집처럼 편안하게 머물 수 있도록 깨끗한 공간과 세심한 안내를 준비했습니다.
+        </div>
+        <b>🛏️ 세 개의 방 이야기 & 인원별 객실 안내</b><br>
+        • <b>Palette Room:</b> 서로 다른 색과 취향이 자연스럽게 어우러지는 방<br>
+        • <b>Amber Room:</b> 따뜻한 빛처럼 편안하게 하루를 마무리하는 방<br>
+        • <b>Cozy Room:</b> 작지만 온전히 나만의 시간을 보낼 수 있는 아늑한 방<br>
+        <span style='font-size: 13px; color: #8C5A3C;'>※ 예약 인원에 맞춰 객실이 준비됩니다 (4인 이하: 침실 2개 - Palette/Amber, 5인 이상: 침실 3개 전체 개방).</span>
+        """,
+        "t1_floorplan_caption": "📐 몽글스테이 3D 공간 구조 및 객실 배치도",
         "t1_rules_title": "🌿 쾌적한 머무름을 위한 약속",
         "t1_rules_body": "1. <b>실내 절대 금연:</b> 건물 전체 및 객실 내 흡연(전자담배 포함)은 엄격히 금지됩니다.<br>2. <b>정숙 시간:</b> 밤 10시 이후에는 이웃을 위해 TV 볼륨과 대화를 조금만 낮춰주세요.<br>3. <b>분리수거 안내:</b> 일반쓰레기, 플라스틱/캔, 음식물 쓰레기는 주방 옆 전용함에 분리해 주세요.<br>4. <b>외출 시 전원 확인:</b> 외출하실 때는 냉난방기 및 인덕션 전원을 꼭 꺼주세요.",
         "t1_contact_title": "🐶 호스트 긴급 연락처",
@@ -161,8 +184,23 @@ CONTENT = {
         "t1_time_body": "• <b>Check-in:</b> After 3:00 PM (15:00)<br>• <b>Check-out:</b> Before 11:00 AM (11:00)<br><span style='font-size: 13px; color: #888;'>※ Please adhere to check-out time for thorough cleaning and fresh bedding preparation.</span>",
         "t1_wifi_title": "📶 Free High-Speed Wi-Fi",
         "t1_wifi_body": "Tap the copy icon next to your preferred Wi-Fi and password to connect.",
-        "t1_wifi_ssid": "Password (Shared for 5G & 2.4G)",
-        "t1_wifi_pw": "Password",
+        "t1_wifi_ssid": "Network Name (SSID)",
+        "t1_wifi_pw": "Password (Shared for 5G & 2.4G)",
+        "t1_story_title": "🎨 Mongle Stay Story & Layout (Curated by miel Yi)",
+        "t1_story_body": """
+        Mongle Stay is a home created so travelers from different countries and cities can comfortably experience everyday life in Seoul. Even if our favorite music and cultures differ, the excitement of traveling and the joy of discovering new stories connect us all. We hope your time here goes beyond a simple stay—becoming a moment to discover your own taste and memories of Seoul.
+        <div class='story-quote'>
+            <b>• Taste:</b> Stay in the way that feels most comfortable to you, surrounded by spaces of distinct colors and moods.<br>
+            <b>• Connection:</b> Experience K-culture alongside the daily rhythm of Anam, where Seoul's historic markets meet new culture.<br>
+            <b>• Peace of Mind:</b> We prepared a spotless home and thoughtful guidance so you feel right at home in an unfamiliar city.
+        </div>
+        <b>🛏️ Story of Three Rooms & Room Setup</b><br>
+        • <b>Palette Room:</b> A room where different colors and personal tastes naturally blend together<br>
+        • <b>Amber Room:</b> A room to unwind and end your day peacefully, like a warm glow<br>
+        • <b>Cozy Room:</b> A snug, intimate room where you can enjoy quiet time all to yourself<br>
+        <span style='font-size: 13px; color: #8C5A3C;'>※ Rooms are prepared based on guest count (1–4 guests: 2 bedrooms [Palette/Amber]; 5+ guests: all 3 bedrooms open).</span>
+        """,
+        "t1_floorplan_caption": "📐 Mongle Stay 3D Floor Plan & Room Layout",
         "t1_rules_title": "🌿 House Rules",
         "t1_rules_body": "1. <b>No Smoking:</b> Smoking (including e-cigarettes) is strictly prohibited inside the room and building.<br>2. <b>Quiet Hours:</b> Please keep noise levels down after 10:00 PM out of respect for neighbors.<br>3. <b>Recycling:</b> Please separate general waste, plastics/cans, and food waste into the bins next to the kitchen.<br>4. <b>Save Energy:</b> Please turn off the A/C, heater, and induction stove when leaving the room.",
         "t1_contact_title": "🐶 Host Contact",
@@ -196,10 +234,26 @@ CONTENT = {
         "t1_wifi_body": "ご希望のWi-Fiとパスワード右側のコピーアイコンを押して接続してください。",
         "t1_wifi_ssid": "ネットワーク名 (SSID)",
         "t1_wifi_pw": "パスワード（5G・2.4G共通）",
+        "t1_story_title": "🎨 Mongle Stay Story & 間取り案内 (Curated by miel Yi)",
+        "t1_story_body": """
+        モングルステイは、異なる国や都市から訪れた旅人たちがソウルの日常を心地よく体験できるようにつくられた家です。好きな音楽や文化は違っても、旅先で感じるときめきや新しい物語に出会う喜びは同じです。ここでの滞在が単なる宿泊を超え、あなただけのソウルの好みと記憶を見つける時間になることを願っています。
+        <div class='story-quote'>
+            <b>• 好み (Taste):</b> それぞれ異なる色と雰囲気を持つ空間で、自分にとって一番心地よいスタイルでお過ごしください。<br>
+            <b>• つながり (Connection):</b> Kカルチャーと安岩の日常、ソウルの歴史ある伝統市場と新しい文化を一緒に体験してください。<br>
+            <b>• 安心 (Peace of Mind):</b> 見知らぬ街でも自宅のようにリラックスできるよう、清潔な空間と丁寧なご案内を用意しました。
+        </div>
+        <b>🛏️ 3つのお部屋の物語＆人数別のお部屋案内</b><br>
+        • <b>Palette Room:</b> 異なる色と好みが自然に調和するお部屋<br>
+        • <b>Amber Room:</b> 温かい光のように穏やかに一日を締めくくるお部屋<br>
+        • <b>Cozy Room:</b> コンパクトながらも自分だけの時間をゆっくり過ごせる居心地の良いお部屋<br>
+        <span style='font-size: 13px; color: #8C5A3C;'>※ ご予約人数に合わせてお部屋をご用意いたします（4名以下：寝室2部屋 [Palette/Amber]、5名以上：寝室3部屋すべて開放）。</span>
+        """,
+        "t1_floorplan_caption": "📐 モングルステイ 3D間取り図・お部屋レイアウト",
         "t1_rules_title": "🌿 快適にお過ごしいただくためのお願い",
         "t1_rules_body": "1. <b>室内完全禁煙:</b> 建物全体および客室内での喫煙（電子タバコ含む）は固くお断りいたします。<br>2. <b>お静かに:</b> 22時以降は近隣住民への配慮のため、お静かにお過ごしください。<br>3. <b>ゴミの分別:</b> 一般ゴミ、プラスチック・缶、生ゴミはキッチン横の専用ゴミ箱へ分別をお願いします。<br>4. <b>外出時の電源オフ:</b> お出かけの際はエアコン・暖房・IHコンロの電源を必ずお切りください。",
         "t1_contact_title": "🐶 ホスト連絡先",
         "t1_contact_body": "ご滞在中に何かお困りの際は、いつでもお気軽にご連絡ください。<br>• <b>予約サイトメッセージ:</b> Airbnb / Trip.com / Booking.com アプリ内チャット（最速）<br>• <b>メッセンジャーID:</b> LINE: <code>mongle-stay</code> / WeChat: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
+        "t2_loc_title": "📍 住所および地図アプリを開く",
         "t2_loc_body": "<b>韓国語住所:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br><b>英語住所:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br><b>最寄り駅:</b> 地下鉄6号線 <b>安岩(アナム)駅 3番出口</b> 徒歩5分",
         "t2_btn_naver": "🟢 NAVERマップでルート検索（韓国で最も正確）",
         "t2_btn_google": "🗺️ Google マップで開く",
@@ -216,182 +270,4 @@ CONTENT = {
         "t4_walk_title": "☕ 徒歩圏内の人気スポット（安岩・祭基ローカル）",
         "t4_walk_body": "<b>1. 高麗大学キャンパス＆安岩グルメ通り（徒歩5〜10分）</b><br>• ヨーロッパのゴシック建築のような美しい石造りのキャンパス散策や、学生街ならではのコスパ抜群のローカルグルメ・カフェ通りをお楽しみください。<br><br><b>2. スターバックス京東1960店＆京東市場（徒歩15分 / バス5分）</b><br>• 1960年代の廃劇場をリノベーションした話題のスターバックスと、活気あふれる韓国最大級の伝統市場（京東市場・ソウル薬令市）の食べ歩きがおすすめです。<br><br><b>3. 城北川(ソンブクチョン)散策路（徒歩8分）</b><br>• 夕食後、ライトアップされた川辺の遊歩道をゆったりお散歩してみてください。",
         "t4_city_title": "🏯 ソウル主要観光地への簡単ルート（安岩駅出発）",
-        "t4_city_body": "<b>1. 東大門デザインプラザ(DDP)＆ショッピング街（約10分）</b><br>• 6号線 安岩駅 ➔ 2駅先の<b>東廟前(トンミョアプ)駅</b>で1号線に乗換 ➔ <b>東大門(トンデムン)駅</b>下車<br><br><b>2. 梨泰院・漢南洞・望遠・合井（乗り換えなし・6号線直通！）</b><br>• 6号線 安岩駅から一本でアクセスできます：<br>&nbsp;&nbsp;- <b>漢江鎮(ハンガンジン)駅（約18分）:</b> 漢南洞のおしゃれカフェ通り＆リウム美術館<br>&nbsp;&nbsp;- <b>梨泰院(イテウォン)駅（約20分）:</b> 梨泰院＆解放村<br>&nbsp;&nbsp;- <b>望遠(マンウォン)・合井(ハプチョン)駅（約32分）:</b> 望遠市場＆弘大(ホンデ)<br><br><b>3. 広蔵市場・益善洞・聖水(ソンス)洞（約15〜25分）</b><br>• <b>広蔵市場・益善洞:</b> <b>東廟前駅</b>で1号線に乗換 ➔ 鍾路5街駅（広蔵市場）／鍾路3街駅（益善洞）<br>• <b>聖水洞カフェ通り:</b> <b>新堂(シンダン)駅</b>で2号線に乗換 ➔ <b>聖水(ソンス)駅</b>下車（約20分）"
-    },
-    "🇨🇳 中文": {
-        "title": "mongle-stay 首尔民宿",
-        "subtitle": "地铁6号线安岩站步行5分钟 · 感受首尔本地烟火气的温馨居所",
-        "tabs": ["🏠 入住指南", "🗺️ 交通路线", "🚇 出行贴士", "✨ 周边游玩"],
-        "t1_time_title": "⏰ 入住与退房时间",
-        "t1_time_body": "• <b>入住时间 (Check-in):</b> 下午 3:00 (15:00) 以后<br>• <b>退房时间 (Check-out):</b> 上午 11:00 (11:00) 以前<br><span style='font-size: 13px; color: #888;'>※ 为确保下一位客人的床品更换与全面消毒，请务必准时退房。</span>",
-        "t1_wifi_title": "📶 免费高速 Wi-Fi",
-        "t1_wifi_body": "请点击所需Wi-Fi及密码右侧的复制图标进行连接。",
-        "t1_wifi_ssid": "网络名称 (SSID)",
-        "t1_wifi_pw": "密码（5G与2.4G通用）",
-        "t1_rules_title": "🌿 住宿公约",
-        "t1_rules_body": "1. <b>室内绝对禁烟:</b> 整栋建筑及房间内严禁吸烟（包括电子烟）。<br>2. <b>保持安静:</b> 晚上10点以后请调低音量，以免打扰周边邻居休息。<br>3. <b>垃圾分类:</b> 请将一般垃圾、塑料/易拉罐、食物残渣分类投放到厨房旁的专用垃圾桶内。<br>4. <b>外出断电:</b> 外出时请务必关闭空调、地暖及电磁炉电源。",
-        "t1_contact_title": "🐶 房东紧急联系方式",
-        "t1_contact_body": "入住期间如需任何帮助，请随时联系我们。<br>• <b>预订平台消息:</b> Airbnb / 携程(Trip.com) / Booking.com 应用内聊天（最快）<br>• <b>即时通讯账号:</b> 微信(WeChat): <code>mongle-stay</code> / LINE: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
-        "t2_loc_title": "📍 民宿地址与地图导航",
-        "t2_loc_body": "<b>韩文地址:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br><b>英文地址:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br><b>最近地铁站:</b> 地铁6号线 <b>安岩站 (Anam Station) 3号出口</b> 步行5分钟",
-        "t2_btn_naver": "🟢 打开 Naver 地图导航（韩国境内最准确）",
-        "t2_btn_google": "🗺️ 打开 Google 地图",
-        "t2_sub_title": "🚉 从地铁6号线「安岩站」步行路线",
-        "t2_sub_body": "• 请从<b>地铁6号线安岩站（高大医院前）3号出口</b>出站。<br>• 出站后朝安岩五岔路口·祭基市场方向直行，拐入 <b>안암로18길 (Anam-ro 18-gil)</b> 小巷，<b>步行约5分钟</b>即可看到“고려맨션 (Goryeo Mansion)”建筑。（2楼 203室）",
-        "t2_air_title": "✈️ 从机场出发路线",
-        "t2_air_body": "<b>1. 仁川国际机场 (ICN) 出发（约 75–85 分钟）</b><br>• <b>机场铁路 + 地铁（推荐）:</b> 乘坐机场铁路普通列车 ➔ 在<b>孔德站 (Gongdeok)</b> 或 <b>数码媒体城站 (DMC)</b> 换乘<b>地铁6号线（往新内方向）</b> ➔ <b>安岩站</b>下车（3号出口步行5分钟）。<br>• <b>机场大巴:</b> 乘坐 6002 路大巴 ➔ 在“祭基洞站·首尔药令市”下车后打车起步价即到（约5分钟）。<br><br><b>2. 金浦国际机场 (GMP) 出发（约 55 分钟）</b><br>• 乘坐机场铁路 ➔ 在 <b>DMC站</b> 换乘<b>6号线</b> ➔ <b>安岩站</b>下车。",
-        "t3_pass_title": "💳 气候同行卡（游客无限次交通卡）",
-        "t3_pass_body": "可在有效期内无限次搭乘首尔市内地铁、公交车及公共自行车（叮铃铃）！<br>• <b>票种与价格:</b> 1日券(5,000韩元)、2日券(8,000韩元)、3日券(10,000韩元)、5日券(15,000韩元)<br>• <b>购买地点:</b> 地铁6号线安岩站客服中心，或附近便利店（GS25、CU、7-Eleven）<br>• <b>充值方式:</b> 在地铁站内自动充值机使用现金按需充值天数即可使用。",
-        "t3_tmoney_title": "🚌 普通交通卡（T-money / WOWPASS）",
-        "t3_tmoney_body": "• <b>T-money卡:</b> 所有便利店均可购买（约3,000–4,000韩元），现金充值后可用于地铁、公交和出租车。<br>• <b>换乘优惠贴士:</b> 下公交车时务必在后门刷卡机再次刷卡，30分钟内换乘地铁或其他公交车可享免费换乘优惠！",
-        "t3_taxi_title": "🚕 打车软件与公共自行车",
-        "t3_taxi_body": "• <b>Kakao T / Uber:</b> 韩国最常用的打车软件。在 Kakao T 中选择“向司机直接付款（现场支付）”，无需绑定韩国银行卡也能轻松叫车。<br>• <b>首尔公共自行车（叮铃铃）:</b> 安岩站出口前设有租车点，购买1小时券（1,000韩元）即可沿城北川、清溪川骑行。",
-        "t4_walk_title": "☕ 步行可达热门打卡点（安岩·祭基本地）",
-        "t4_walk_body": "<b>1. 高丽大学校园 & 安岩大学街美食（步行 5–10 分钟）</b><br>• 漫步于充满欧式哥特风情的石造建筑校园，打卡大学街性价比超高的本地美食店与咖啡馆。<br><br><b>2. 星巴克京东1960店 & 京东市场（步行 15 分钟 / 公交 5 分钟）</b><br>• 强烈推荐由1960年代老剧场改造而成的网红星巴克，顺便逛逛首尔最具烟火气的传统市场（京东市场·首尔药令市）。<br><br><b>3. 城北川散步路（步行 8 分钟）</b><br>• 晚饭后沿着灯光璀璨的溪边步道悠闲散步，感受首尔本地人的慢生活。",
-        "t4_city_title": "🏯 首尔核心景点快捷路线（安岩站出发）",
-        "t4_city_body": "<b>1. 东大门设计广场 (DDP) & 购物商圈（约 10 分钟）</b><br>• 地铁6号线安岩站 ➔ 2站后在<b>东庙前站</b>换乘1号线 ➔ <b>东大门站</b>下车。<br><br><b>2. 梨泰院 · 汉南洞 · 望远 · 合井（6号线直达无需换乘！）</b><br>• 从安岩站乘坐6号线即可一线直达：<br>&nbsp;&nbsp;- <b>汉江镇站（约18分钟）:</b> 汉南洞潮流咖啡街 & 三星美术馆 Leeum<br>&nbsp;&nbsp;- <b>梨泰院站（约20分钟）:</b> 梨泰院经理团路 & 解放村<br>&nbsp;&nbsp;- <b>望远站 · 合井站（约32分钟）:</b> 望理团路 & 望远市场 & 弘大商圈<br><br><b>3. 广藏市场 · 益善洞 · 圣水洞（约 15–25 分钟）</b><br>• <b>广藏市场·益善洞:</b> 在<b>东庙前站</b>换乘1号线 ➔ 钟路5街站（广藏市场）/ 钟路3街站（益善洞）。<br>• <b>圣水洞咖啡街:</b> 在<b>新堂站</b>换乘2号线 ➔ <b>圣水站</b>下车（约20分钟）。"
-    }
-}
-
-# 4. 상단 언어 선택 바 (한국어 / 영어 / 일본어 / 중국어)
-selected_lang = st.radio(
-    "Language",
-    options=list(CONTENT.keys()),
-    horizontal=True,
-    label_visibility="collapsed"
-)
-t = CONTENT[selected_lang]
-
-# 5. 상단 웰컴 헤더
-st.markdown(f"""
-<div class="hero-box">
-    <div style="font-size: 30px; margin-bottom: 4px;">🐾</div>
-    <h1 class="hero-title">{t['title']}</h1>
-    <p class="hero-subtitle">{t['subtitle']}</p>
-</div>
-""", unsafe_allow_html=True)
-
-# 6. 4대 핵심 게스트 안내 탭 구성
-tab_home, tab_way, tab_trans, tab_spot = st.tabs(t["tabs"])
-
-# TAB 1: 숙소 이용 및 체크인 안내
-with tab_home:
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">CHECK-IN & OUT</span>
-        <div class="card-title">{t['t1_time_title']}</div>
-        <p class="card-text">{t['t1_time_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">FREE WI-FI</span>
-        <div class="card-title">{t['t1_wifi_title']}</div>
-        <p class="card-text">{t['t1_wifi_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        st.caption(t['t1_wifi_ssid'])
-        st.code("U+Net1825_5G", language=None)
-        st.code("U+Net1825", language=None)
-    with col2:
-        st.caption(t['t1_wifi_pw'])
-        st.code("42155551M#", language=None)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">HOUSE RULES</span>
-        <div class="card-title">{t['t1_rules_title']}</div>
-        <p class="card-text">{t['t1_rules_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card" style="background-color: #F4F7F5; border-color: #C8D6CE;">
-        <div class="card-title">{t['t1_contact_title']}</div>
-        <p class="card-text">{t['t1_contact_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# TAB 2: 숙소에 찾아오는 방법
-with tab_way:
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">LOCATION</span>
-        <div class="card-title">{t['t2_loc_title']}</div>
-        <p class="card-text">{t['t2_loc_body']}</p>
-        <a href="https://map.naver.com/p/search/서울특별시 동대문구 안암로18길 3" target="_blank" class="map-btn">{t['t2_btn_naver']}</a>
-        <a href="https://maps.google.com/?q=서울특별시+동대문구+안암로18길+3" target="_blank" class="map-btn map-btn-sub">{t['t2_btn_google']}</a>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">SUBWAY</span>
-        <div class="card-title">{t['t2_sub_title']}</div>
-        <p class="card-text">{t['t2_sub_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">FROM AIRPORT</span>
-        <div class="card-title">{t['t2_air_title']}</div>
-        <p class="card-text">{t['t2_air_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# TAB 3: 유용한 교통수단 가이드
-with tab_trans:
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">BEST PASS</span>
-        <div class="card-title">{t['t3_pass_title']}</div>
-        <p class="card-text">{t['t3_pass_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">T-MONEY</span>
-        <div class="card-title">{t['t3_tmoney_title']}</div>
-        <p class="card-text">{t['t3_tmoney_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">TAXI & BIKE</span>
-        <div class="card-title">{t['t3_taxi_title']}</div>
-        <p class="card-text">{t['t3_taxi_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# TAB 4: 숙소 주변 및 서울 핵심 명소 가는 법
-with tab_spot:
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">WALKING 5~15 MIN</span>
-        <div class="card-title">{t['t4_walk_title']}</div>
-        <p class="card-text">{t['t4_walk_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown(f"""
-    <div class="info-card">
-        <span class="badge">SUBWAY 10~30 MIN</span>
-        <div class="card-title">{t['t4_city_title']}</div>
-        <p class="card-text">{t['t4_city_body']}</p>
-    </div>
-    """, unsafe_allow_html=True)
-
-# 7. 하단 푸터
-st.markdown("""
-<div style="text-align: center; padding: 24px 0 10px 0; color: #8C857B; font-size: 12.5px;">
-    © 2026 <b>mongle-stay Seoul (Anam · Jegi-dong)</b>. All rights reserved.<br>
-    Have a cozy and wonderful stay in Seoul 🐾
-</div>
-""", unsafe_allow_html=True)
+        "t4_city
