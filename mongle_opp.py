@@ -118,7 +118,6 @@ st.markdown("""
         color: #2E5A44 !important;
         box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     }
-    /* 라디오 버튼(언어 선택바) 가로 정렬 스타일 */
     div[role="radiogroup"] {
         justify-content: center;
         gap: 8px;
@@ -268,8 +267,209 @@ CONTENT = {
         "t3_taxi_title": "🚕 タクシー配車アプリ＆公共自転車",
         "t3_taxi_body": "• <b>Kakao T / Uber:</b> 韓国で最も捕まりやすい配車アプリです。Kakao Tでは「運転手に直接支払い(現地決済)」を選べば日本のクレジットカード登録なしでも利用可能です。<br>• <b>ソウル自転車 タルンイ:</b> 安岩駅出口前のポートからアプリで1時間券(1,000ウォン)を購入し、城北川・清渓川沿いのサイクリングを楽しめます。",
         "t4_walk_title": "☕ 徒歩圏内の人気スポット（安岩・祭基ローカル）",
+        "t4_walk_body": "<b>1. 高麗大学キャンパス＆安岩グルメ通り（徒歩5〜10分）</b><br>• ヨーロッパのゴシック建築のような美しい石造りのキャンパス散策や、学生街ならではのコスパ抜群のローカルグルメ・カフェ通りをお楽しみください。<br><br><b>2. スターバックス京東1960店＆京東市場（徒歩15分 / バス5分）</b><br>• 1960年代の廃劇場をリノベーションした話題のスターバックスと、活気あふれる韓国最大級の伝統市場（京東市場・ソウル薬令市）の食べ歩きがおすすめです。<br><br><b>3. 城北川(ソンブクチョン)散策路（徒歩8分）</b><br>• 夕食後、ライトアップされた川辺の遊歩道をゆったりお散歩してみてください。",
+        "t4_city_title": "🏯 ソウル主要観光地への簡単ルート（安岩駅出発）",
+        "t4_city_body": "<b>1. 東大門デザインプラザ(DDP)＆ショッピング街（約10分）</b><br>• 6号線 安岩駅 ➔ 2駅先の<b>東廟前(トンミョアプ)駅</b>で1号線に乗換 ➔ <b>東大門(トンデムン)駅</b>下車<br><br><b>2. 梨泰院・漢南洞・望遠・合井（乗り換えなし・6号線直通！）</b><br>• 6号線 安岩駅から一本でアクセスできます：<br>&nbsp;&nbsp;- <b>漢江鎮(ハンガンジン)駅（約18分）:</b> 漢南洞のおしゃれカフェ通り＆リウム美術館<br>&nbsp;&nbsp;- <b>梨泰院(イテウォン)駅（約20分）:</b> 梨泰院＆解放村<br>&nbsp;&nbsp;- <b>望遠(マンウォン)・合井(ハプチョン)駅（約32分）:</b> 望遠市場＆弘大(ホンデ)<br><br><b>3. 広蔵市場・益善洞・聖水(ソンス)洞（約15〜25分）</b><br>• <b>広蔵市場・益善洞:</b> <b>東廟前駅</b>で1号線に乗換 ➔ 鍾路5街駅（広蔵市場）／鍾路3街駅（益善洞）<br>• <b>聖水洞カフェ通り:</b> <b>新堂(シンダン)駅</b>で2号線に乗換 ➔ <b>聖水(ソンス)駅</b>下車（約20分）"
+    },
+    "🇨🇳 中文": {
+        "title": "mongle-stay 首尔民宿",
+        "subtitle": "地铁6号线安岩站步行5分钟 · 感受首尔本地烟火气的温馨居所",
+        "tabs": ["🏠 入住指南", "🗺️ 交通路线", "🚇 出行贴士", "✨ 周边游玩"],
+        "t1_time_title": "⏰ 入住与退房时间",
+        "t1_time_body": "• <b>入住时间 (Check-in):</b> 下午 3:00 (15:00) 以后<br>• <b>退房时间 (Check-out):</b> 上午 11:00 (11:00) 以前<br><span style='font-size: 13px; color: #888;'>※ 为确保下一位客人的床品更换与全面消毒，请务必准时退房。</span>",
+        "t1_wifi_title": "📶 免费高速 Wi-Fi",
+        "t1_wifi_body": "请点击所需Wi-Fi及密码右侧的复制图标进行连接。",
+        "t1_wifi_ssid": "网络名称 (SSID)",
+        "t1_wifi_pw": "密码（5G与2.4G通用）",
+        "t1_story_title": "🎨 Mongle Stay Story & 空间户型介绍 (Curated by miel Yi)",
+        "t1_story_body": """
+        Mongle Stay 是为了让来自不同国家和城市的旅行者都能舒适地体验首尔日常生活而打造的家。即使喜欢的音乐与文化各不相同，在旅途中感受到的心动与发现新故事的喜悦却是相通的。希望您在 Mongle Stay 停留的时光不仅是一次简单的住宿，更是一段发现属于自己首尔品味与美好回忆的旅程。
+        <div class='story-quote'>
+            <b>• 品味 (Taste):</b> 在拥有不同色彩与氛围的空间里，以最让自己感到自在的方式停留。<br>
+            <b>• 连接 (Connection):</b> 感受 K-Culture 与安岩的日常烟火气，邂逅首尔古老的传统市场与新潮文化。<br>
+            <b>• 安心 (Peace of Mind):</b> 即使身处陌生的城市也能像在家一样安心，我们为您准备了整洁的空间与细致贴心的指引。
+        </div>
+        <b>🛏️ 三间卧室的故事 & 入住人数房型配置</b><br>
+        • <b>Palette Room:</b> 不同色彩与个人品味自然交融的房间<br>
+        • <b>Amber Room:</b> 如温暖灯光般伴您舒适结束一天旅程的房间<br>
+        • <b>Cozy Room:</b> 小巧却能完全享受独处时光的温馨房间<br>
+        <span style='font-size: 13px; color: #8C5A3C;'>※ 客房将根据预订人数为您准备（4人及以下：开放2间卧室 [Palette/Amber]；5人及以上：开放全部3间卧室）。</span>
+        """,
+        "t1_floorplan_caption": "📐 Mongle Stay 3D 空间结构与房间布局图",
+        "t1_rules_title": "🌿 住宿公约",
+        "t1_rules_body": "1. <b>室内绝对禁烟:</b> 整栋建筑及房间内严禁吸烟（包括电子烟）。<br>2. <b>保持安静:</b> 晚上10点以后请调低音量，以免打扰周边邻居休息。<br>3. <b>垃圾分类:</b> 请将一般垃圾、塑料/易拉罐、食物残渣分类投放到厨房旁的专用垃圾桶内。<br>4. <b>外出断电:</b> 外出时请务必关闭空调、地暖及电磁炉电源。",
+        "t1_contact_title": "🐶 房东紧急联系方式",
+        "t1_contact_body": "入住期间如需任何帮助，请随时联系我们。<br>• <b>预订平台消息:</b> Airbnb / 携程(Trip.com) / Booking.com 应用内聊天（最快）<br>• <b>即时通讯账号:</b> 微信(WeChat): <code>mongle-stay</code> / LINE: <code>mongle-stay</code> / KakaoTalk: <code>mongle0607</code>",
+        "t2_loc_title": "📍 民宿地址与地图导航",
+        "t2_loc_body": "<b>韩文地址:</b> 서울특별시 동대문구 안암로18길 3 고려맨션 203호<br><b>英文地址:</b> #203, Goryeo Mansion, 3, Anam-ro 18-gil, Dongdaemun-gu, Seoul<br><b>最近地铁站:</b> 地铁6号线 <b>安岩站 (Anam Station) 3号出口</b> 步行5分钟",
+        "t2_btn_naver": "🟢 打开 Naver 地图导航（韩国境内最准确）",
+        "t2_btn_google": "🗺️ 打开 Google 地图",
+        "t2_sub_title": "🚉 从地铁6号线「安岩站」步行路线",
+        "t2_sub_body": "• 请从<b>地铁6号线安岩站（高大医院前）3号出口</b>出站。<br>• 出站后朝安岩五岔路口·祭基市场方向直行，拐入 <b>안암로18길 (Anam-ro 18-gil)</b> 小巷，<b>步行约5分钟</b>即可看到“고려맨션 (Goryeo Mansion)”建筑。（2楼 203室）",
+        "t2_air_title": "✈️ 从机场出发路线",
+        "t2_air_body": "<b>1. 仁川国际机场 (ICN) 出发（约 75–85 分钟）</b><br>• <b>机场铁路 + 地铁（推荐）:</b> 乘坐机场铁路普通列车 ➔ 在<b>孔德站 (Gongdeok)</b> 或 <b>数码媒体城站 (DMC)</b> 换乘<b>地铁6号线（往新内方向）</b> ➔ <b>安岩站</b>下车（3号出口步行5分钟）。<br>• <b>机场大巴:</b> 乘坐 6002 路大巴 ➔ 在“祭基洞站·首尔药令市”下车后打车起步价即到（约5分钟）。<br><br><b>2. 金浦国际机场 (GMP) 出发（约 55 分钟）</b><br>• 乘坐机场铁路 ➔ 在 <b>DMC站</b> 换乘<b>6号线</b> ➔ <b>安岩站</b>下车。",
+        "t3_pass_title": "💳 气候同行卡（游客无限次交通卡）",
+        "t3_pass_body": "可在有效期内无限次搭乘首尔市内地铁、公交车及公共自行车（叮铃铃）！<br>• <b>票种与价格:</b> 1日券(5,000韩元)、2日券(8,000韩元)、3日券(10,000韩元)、5日券(15,000韩元)<br>• <b>购买地点:</b> 地铁6号线安岩站客服中心，或附近便利店（GS25、CU、7-Eleven）<br>• <b>充值方式:</b> 在地铁站内自动充值机使用现金按需充值天数即可使用。",
+        "t3_tmoney_title": "🚌 普通交通卡（T-money / WOWPASS）",
+        "t3_tmoney_body": "• <b>T-money卡:</b> 所有便利店均可购买（约3,000–4,000韩元），现金充值后可用于地铁、公交和出租车。<br>• <b>换乘优惠贴士:</b> 下公交车时务必在后门刷卡机再次刷卡，30分钟内换乘地铁或其他公交车可享免费换乘优惠！",
+        "t3_taxi_title": "🚕 打车软件与公共自行车",
+        "t3_taxi_body": "• <b>Kakao T / Uber:</b> 韩国最常用的打车软件。在 Kakao T 中选择“向司机直接付款（现场支付）”，无需绑定韩国银行卡也能轻松叫车。<br>• <b>首尔公共自行车（叮铃铃）:</b> 安岩站出口前设有租车点，购买1小时券（1,000韩元）即可沿城北川、清溪川骑行。",
+        "t4_walk_title": "☕ 步行可达热门打卡点（安岩·祭基本地）",
         "t4_walk_body": "<b>1. 高丽大学校园 & 安岩大学街美食（步行 5–10 分钟）</b><br>• 漫步于充满欧式哥特风情的石造建筑校园，打卡大学街性价比超高的本地美食店与咖啡馆。<br><br><b>2. 星巴克京东1960店 & 京东市场（步行 15 分钟 / 公交 5 分钟）</b><br>• 强烈推荐由1960年代老剧场改造而成的网红星巴克，顺便逛逛首尔最具烟火气的传统市场（京东市场·首尔药令市）。<br><br><b>3. 城北川散步路（步行 8 分钟）</b><br>• 晚饭后沿着灯光璀璨的溪边步道悠闲散步，感受首尔本地人的慢生活。",
         "t4_city_title": "🏯 首尔核心景点快捷路线（安岩站出发）",
         "t4_city_body": "<b>1. 东大门设计广场 (DDP) & 购物商圈（约 10 分钟）</b><br>• 地铁6号线安岩站 ➔ 2站后在<b>东庙前站</b>换乘1号线 ➔ <b>东大门站</b>下车。<br><br><b>2. 梨泰院 · 汉南洞 · 望远 · 合井（6号线直达无需换乘！）</b><br>• 从安岩站乘坐6号线即可一线直达：<br>&nbsp;&nbsp;- <b>汉江镇站（约18分钟）:</b> 汉南洞潮流咖啡街 & 三星美术馆 Leeum<br>&nbsp;&nbsp;- <b>梨泰院站（约20分钟）:</b> 梨泰院经理团路 & 解放村<br>&nbsp;&nbsp;- <b>望远站 · 合井站（约32分钟）:</b> 望理团路 & 望远市场 & 弘大商圈<br><br><b>3. 广藏市场 · 益善洞 · 圣水洞（约 15–25 分钟）</b><br>• <b>广藏市场·益善洞:</b> 在<b>东庙前站</b>换乘1号线 ➔ 钟路5街站（广藏市场）/ 钟路3街站（益善洞）。<br>• <b>圣水洞咖啡街:</b> 在<b>新堂站</b>换乘2号线 ➔ <b>圣水站</b>下车（约20分钟）。"
     }
 }
+
+# 4. 상단 언어 선택 바 (한국어 / 영어 / 일본어 / 중국어)
+selected_lang = st.radio(
+    "Language",
+    options=list(CONTENT.keys()),
+    horizontal=True,
+    label_visibility="collapsed"
+)
+t = CONTENT[selected_lang]
+
+# 5. 상단 웰컴 헤더
+st.markdown(f"""
+<div class="hero-box">
+    <div style="font-size: 30px; margin-bottom: 4px;">🐾</div>
+    <h1 class="hero-title">{t['title']}</h1>
+    <p class="hero-subtitle">{t['subtitle']}</p>
+</div>
+""", unsafe_allow_html=True)
+
+# 6. 4대 핵심 게스트 안내 탭 구성
+tab_home, tab_way, tab_trans, tab_spot = st.tabs(t["tabs"])
+
+# TAB 1: 숙소 이용 및 체크인 안내
+with tab_home:
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">CHECK-IN & OUT</span>
+        <div class="card-title">{t['t1_time_title']}</div>
+        <p class="card-text">{t['t1_time_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">FREE WI-FI</span>
+        <div class="card-title">{t['t1_wifi_title']}</div>
+        <p class="card-text">{t['t1_wifi_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.caption(t['t1_wifi_ssid'])
+        st.code("U+Net1825_5G", language=None)
+        st.code("U+Net1825", language=None)
+    with col2:
+        st.caption(t['t1_wifi_pw'])
+        st.code("42155551M#", language=None)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">MONGLE STAY STORY</span>
+        <div class="card-title">{t['t1_story_title']}</div>
+        <div class="card-text">{t['t1_story_body']}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.image("floorplan.png", caption=t['t1_floorplan_caption'], use_container_width=True)
+
+    st.markdown(f"""
+    <div class="info-card" style="margin-top: 16px;">
+        <span class="badge">HOUSE RULES</span>
+        <div class="card-title">{t['t1_rules_title']}</div>
+        <p class="card-text">{t['t1_rules_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card" style="background-color: #F4F7F5; border-color: #C8D6CE;">
+        <div class="card-title">{t['t1_contact_title']}</div>
+        <p class="card-text">{t['t1_contact_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# TAB 2: 숙소에 찾아오는 방법
+with tab_way:
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">LOCATION</span>
+        <div class="card-title">{t['t2_loc_title']}</div>
+        <p class="card-text">{t['t2_loc_body']}</p>
+        <a href="https://map.naver.com/p/search/서울특별시 동대문구 안암로18길 3" target="_blank" class="map-btn">{t['t2_btn_naver']}</a>
+        <a href="https://maps.google.com/?q=서울특별시+동대문구+안암로18길+3" target="_blank" class="map-btn map-btn-sub">{t['t2_btn_google']}</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">SUBWAY</span>
+        <div class="card-title">{t['t2_sub_title']}</div>
+        <p class="card-text">{t['t2_sub_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">FROM AIRPORT</span>
+        <div class="card-title">{t['t2_air_title']}</div>
+        <p class="card-text">{t['t2_air_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# TAB 3: 유용한 교통수단 가이드
+with tab_trans:
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">BEST PASS</span>
+        <div class="card-title">{t['t3_pass_title']}</div>
+        <p class="card-text">{t['t3_pass_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">T-MONEY</span>
+        <div class="card-title">{t['t3_tmoney_title']}</div>
+        <p class="card-text">{t['t3_tmoney_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">TAXI & BIKE</span>
+        <div class="card-title">{t['t3_taxi_title']}</div>
+        <p class="card-text">{t['t3_taxi_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# TAB 4: 숙소 주변 및 서울 핵심 명소 가는 법
+with tab_spot:
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">WALKING 5~15 MIN</span>
+        <div class="card-title">{t['t4_walk_title']}</div>
+        <p class="card-text">{t['t4_walk_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+    <div class="info-card">
+        <span class="badge">SUBWAY 10~30 MIN</span>
+        <div class="card-title">{t['t4_city_title']}</div>
+        <p class="card-text">{t['t4_city_body']}</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# 7. 하단 푸터
+st.markdown("""
+<div style="text-align: center; padding: 24px 0 10px 0; color: #8C857B; font-size: 12.5px;">
+    © 2026 <b>mongle-stay Seoul (Anam · Jegi-dong)</b>. All rights reserved.<br>
+    Have a cozy and wonderful stay in Seoul 🐾
+</div>
+""", unsafe_allow_html=True)
