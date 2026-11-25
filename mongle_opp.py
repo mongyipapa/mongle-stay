@@ -474,8 +474,9 @@ selected_lang = st.radio(
 )
 t = CONTENT[selected_lang]
 
-# 5. 상단 웰컴 헤더
+# 5. 상단 웰컴 헤더 (최상단 앵커 포함)
 st.markdown(f"""
+<div id="top"></div>
 <div class="hero-box">
     <div style="font-size: 30px; margin-bottom: 4px;">🐾</div>
     <h1 class="hero-title">{t['title']}</h1>
@@ -648,14 +649,30 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# 8. 페이지 전환 시 화면 맨 위로 자동 스크롤
+# 8. 페이지 전환 시 화면 맨 위로 자동 스크롤 (모바일/데스크탑 통합 대응)
 if st.session_state.scroll_to_top:
+    import time
     components.html(
-        """
+        f"""
+        <!-- {time.time()} -->
         <script>
-            window.parent.scrollTo({top: 0, behavior: 'smooth'});
-            const main = window.parent.document.querySelector('section.main');
-            if (main) { main.scrollTo({top: 0, behavior: 'smooth'}); }
+            function scrollToTop() {{
+                try {{
+                    const parentDoc = window.parent.document;
+                    const anchor = parentDoc.getElementById('top');
+                    if (anchor) {{
+                        anchor.scrollIntoView({{ behavior: 'instant', block: 'start' }});
+                    }}
+                    const containers = parentDoc.querySelectorAll(
+                        '[data-testid="stAppViewContainer"], section.main, .stApp'
+                    );
+                    containers.forEach(el => {{ el.scrollTop = 0; }});
+                    window.parent.scrollTo(0, 0);
+                }} catch (e) {{}}
+            }}
+            scrollToTop();
+            setTimeout(scrollToTop, 100);
+            setTimeout(scrollToTop, 300);
         </script>
         """,
         height=0
