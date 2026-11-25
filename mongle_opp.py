@@ -32,73 +32,85 @@ def go_to_tab(idx):
     st.session_state.active_tab = idx
     st.session_state.scroll_to_top = True
 
-# 2. 커스텀 CSS (모바일 1줄 고정 · 슬림 헤더 · 택시 카드 · 깔끔한 버튼)
+# 2. 커스텀 CSS (아이폰 4열 가로 1줄 완벽 정렬 · 잘림 방지)
 st.markdown("""
 <style>
     .stApp {
         background-color: #FAF9F6;
         color: #3C4043;
+        overflow-x: hidden;
     }
     .block-container {
         padding-top: 0.9rem !important;
         padding-bottom: 2.5rem !important;
+        padding-left: 0.9rem !important;
+        padding-right: 0.9rem !important;
         max-width: 680px !important;
     }
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     header {visibility: hidden;}
 
-    /* 모바일에서도 4열 컬럼이 가로 1줄 유지되도록 강제 설정 */
+    /* 모바일에서도 컬럼이 가로 1줄로 균등 분할되도록 강제 */
     div[data-testid="stHorizontalBlock"] {
         display: flex !important;
         flex-direction: row !important;
         flex-wrap: nowrap !important;
-        gap: 6px !important;
+        gap: 4px !important;
+        width: 100% !important;
     }
-    div[data-testid="stHorizontalBlock"] > div[data-testid="column"] {
+    div[data-testid="stHorizontalBlock"] > div[data-testid="column"],
+    div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
         flex: 1 1 0% !important;
         min-width: 0 !important;
-        width: auto !important;
+        max-width: 100% !important;
+        width: 0 !important;
+    }
+    div[data-testid="stHorizontalBlock"] div.stButton,
+    div[data-testid="stHorizontalBlock"] div.stButton > button {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        padding-left: 2px !important;
+        padding-right: 2px !important;
+        font-size: 11.5px !important;
     }
 
-    /* 상단 헤더 (한 줄 고정) */
+    /* 상단 헤더 (한 줄 고정 + 잘림 방지) */
     .hero-box {
         background: linear-gradient(135deg, #2E5A44 0%, #4A7C62 100%);
         color: #FFFFFF;
-        padding: 15px 18px;
+        padding: 16px 16px;
         border-radius: 16px;
         margin-top: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         box-shadow: 0 6px 16px rgba(46, 90, 68, 0.15);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 8px;
+        text-align: center;
     }
     .hero-title {
-        font-size: 19px;
+        font-size: 21px;
         font-weight: 700;
-        margin: 0 0 3px 0;
-        letter-spacing: -0.4px;
+        margin: 0 0 4px 0;
+        letter-spacing: -0.3px;
         color: #FFFFFF;
         white-space: nowrap;
     }
     .hero-subtitle {
         font-size: 12px;
-        opacity: 0.92;
-        margin: 0;
+        opacity: 0.94;
+        margin: 0 0 8px 0;
         color: #E8F2EC;
         line-height: 1.35;
     }
     .hero-badge {
+        display: inline-block;
         background-color: rgba(255, 255, 255, 0.18);
-        padding: 5px 9px;
+        padding: 4px 12px;
         border-radius: 16px;
         font-size: 11px;
         font-weight: 600;
         color: #FFFFFF;
         white-space: nowrap;
-        flex-shrink: 0;
     }
 
     /* 택시 기사님용 큰 글씨 카드 */
@@ -106,7 +118,7 @@ st.markdown("""
         background-color: #FFFDF7;
         border: 2px solid #D9A036;
         border-radius: 16px;
-        padding: 16px 18px;
+        padding: 16px 16px;
         margin-bottom: 14px;
         box-shadow: 0 3px 10px rgba(217, 160, 54, 0.08);
     }
@@ -121,7 +133,7 @@ st.markdown("""
         margin-bottom: 8px;
     }
     .taxi-kr-main {
-        font-size: 18.5px;
+        font-size: 18px;
         font-weight: 700;
         color: #1F1D1B;
         line-height: 1.45;
@@ -129,7 +141,7 @@ st.markdown("""
         word-break: keep-all;
     }
     .taxi-kr-sub {
-        font-size: 13.5px;
+        font-size: 13px;
         font-weight: 600;
         color: #5C554E;
         margin-top: 4px;
@@ -139,18 +151,18 @@ st.markdown("""
         background-color: #FFFFFF;
         border: 1px solid #E8E4DC;
         border-radius: 16px;
-        padding: 18px;
+        padding: 18px 16px;
         margin-bottom: 14px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     }
     .card-title {
-        font-size: 16px;
+        font-size: 15.5px;
         font-weight: 700;
         color: #2E5A44;
         margin-bottom: 9px;
         display: flex;
         align-items: center;
-        gap: 7px;
+        gap: 6px;
     }
     .card-text {
         font-size: 14px;
@@ -211,13 +223,20 @@ st.markdown("""
 
     /* 버튼 공통 스타일 */
     div.stButton > button {
-        border-radius: 12px;
+        border-radius: 10px;
         font-weight: 600;
         font-size: 12.5px;
         padding: 8px 4px;
         border: 1px solid #DCD6CA;
         transition: all 0.15s;
         white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    div.stButton > button p {
+        font-size: 11.5px !important;
+        margin: 0 !important;
+        white-space: nowrap !important;
     }
     div.stButton > button[kind="primary"] {
         background-color: #2E5A44;
@@ -245,8 +264,8 @@ CONTENT = {
     "한국어": {
         "title": "mongle-stay",
         "subtitle": "6호선 안암역 도보 5분 · 서울 동대문 제기동 스테이",
-        "hero_badge": "IN 15:00 · OUT 11:00",
-        "tabs": ["🗺️ 오시는 길", "🔑 체크인", "🏡 스토리", "✨ 로컬·교통"],
+        "hero_badge": "체크인 15:00 · 체크아웃 11:00",
+        "tabs": ["🗺️ 오시는길", "🔑 체크인", "🏡 스토리", "✨ 교통"],
         "next_to_checkin": "👉 다음 안내: 체크인 · 도어락 · Wi-Fi 보기",
         "next_to_story": "👉 다음 안내: 몽글스테이 스토리 & 객실 구조 보기",
         "next_to_local": "👉 다음 안내: 서울 권역별 교통 & 로컬 보기",
@@ -385,8 +404,8 @@ CONTENT = {
     "English": {
         "title": "mongle-stay",
         "subtitle": "5-min walk from Anam Stn (Line 6) · Cozy Local Stay in Seoul",
-        "hero_badge": "IN 15:00 · OUT 11:00",
-        "tabs": ["🗺️ Directions", "🔑 Check-in", "🏡 Story", "✨ Transit"],
+        "hero_badge": "Check-in 15:00 · Out 11:00",
+        "tabs": ["🗺️ Map", "🔑 Check-in", "🏡 Story", "✨ Transit"],
         "next_to_checkin": "👉 Next: Check-in · Door Lock · Wi-Fi",
         "next_to_story": "👉 Next: Mongle Stay Story & Room Layout",
         "next_to_local": "👉 Next: Seoul Area Transit & Local Gems",
@@ -521,7 +540,7 @@ CONTENT = {
         "title": "mongle-stay",
         "subtitle": "地下鉄6号線「安岩(アナム)駅」徒歩5分 · ローカル感性あふれる空間",
         "hero_badge": "IN 15:00 · OUT 11:00",
-        "tabs": ["🗺️ アクセス", "🔑 チェックイン", "🏡 ストーリー", "✨ 周辺·交通"],
+        "tabs": ["🗺️ アクセス", "🔑 入室", "🏡 物語", "✨ 交通"],
         "next_to_checkin": "👉 次へ：チェックイン・ドアロック・Wi-Fi",
         "next_to_story": "👉 次へ：モングルステイ物語＆お部屋案内",
         "next_to_local": "👉 次へ：エリア別交通＆周辺スポット",
@@ -655,8 +674,8 @@ CONTENT = {
     "中文": {
         "title": "mongle-stay",
         "subtitle": "地铁6号线安岩站步行5分钟 · 感受首尔本地烟火气的温馨居所",
-        "hero_badge": "IN 15:00 · OUT 11:00",
-        "tabs": ["🗺️ 交通路线", "🔑 入住指南", "🏡 民宿故事", "✨ 周边·出行"],
+        "hero_badge": "入住 15:00 · 退房 11:00",
+        "tabs": ["🗺️ 路线", "🔑 入住", "🏡 故事", "✨ 交通"],
         "next_to_checkin": "👉 下一步：查看入住密码与 Wi-Fi",
         "next_to_story": "👉 下一步：查看民宿故事与3D户型图",
         "next_to_local": "👉 下一步：查看首尔分区公交与周边打卡",
@@ -789,7 +808,7 @@ CONTENT = {
     }
 }
 
-# 4. 상단 언어 선택 바 (4열 가로 1줄 고정 버튼)
+# 4. 상단 언어 선택 바 (4열 가로 1줄 균등 분할)
 st.markdown('<div id="top"></div>', unsafe_allow_html=True)
 lang_keys = ["한국어", "English", "日本語", "中文"]
 lang_cols = st.columns(4)
@@ -807,18 +826,16 @@ for idx, l_key in enumerate(lang_keys):
 
 t = CONTENT[st.session_state.selected_lang]
 
-# 5. 상단 슬림 웰컴 헤더 (한 줄 고정)
+# 5. 상단 슬림 웰컴 헤더 (중앙 정렬 + 잘림 방지)
 st.markdown(f"""
 <div class="hero-box">
-    <div>
-        <h1 class="hero-title">🐾 {t['title']}</h1>
-        <p class="hero-subtitle">{t['subtitle']}</p>
-    </div>
+    <h1 class="hero-title">🐾 {t['title']}</h1>
+    <p class="hero-subtitle">{t['subtitle']}</p>
     <div class="hero-badge">{t['hero_badge']}</div>
 </div>
 """, unsafe_allow_html=True)
 
-# 6. 상단 4대 카테고리 네비게이션 버튼 바 (가로 1줄 고정)
+# 6. 상단 4대 카테고리 네비게이션 버튼 바 (4열 가로 1줄 균등 분할)
 nav_cols = st.columns(4)
 for idx, label in enumerate(t["tabs"]):
     with nav_cols[idx]:
